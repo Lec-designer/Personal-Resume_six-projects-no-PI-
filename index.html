@@ -1,0 +1,2212 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>智能交互设计作品集 · Interaction Design Portfolio</title><style>/* ============ 智能交互设计作品集 ============ */
+:root{
+  --bg:#f6f4ef; --bg2:#efece5; --card:#fdfcfa;
+  --ink:#2c2925; --ink2:#57524b; --muted:#938c82; --line:#e7e2d9;
+  --accent:#8a9a7b;            /* 主题：低饱和 sage */
+  --accent-d:#6f7e62;
+  --shadow:0 18px 50px -24px rgba(60,52,40,.35);
+  --shadow-s:0 6px 20px -10px rgba(60,52,40,.28);
+  --r:18px;
+  --serif:"Georgia","Songti SC","Noto Serif SC",serif;
+  --sans:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);
+  line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+
+/* ---- 通用容器 ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+.sec{padding:120px 0}
+.eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--accent-d);font-weight:700;margin-bottom:16px}
+.h2{font-family:var(--serif);font-size:40px;line-height:1.2;font-weight:600;
+  letter-spacing:.5px;margin-bottom:14px}
+.lead{color:var(--ink2);font-size:15px;line-height:1.75;max-width:640px}
+.tag{display:inline-block;padding:5px 14px;border:1px solid var(--line);
+  border-radius:999px;font-size:13px;color:var(--ink2);background:var(--card);
+  margin:4px 6px 4px 0;transition:.35s}
+.tag:hover{border-color:var(--accent);color:var(--accent-d);transform:translateY(-2px)}
+
+/* ---- 顶栏 ---- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;
+  align-items:center;justify-content:space-between;padding:20px 40px;
+  transition:.4s;mix-blend-mode:normal}
+.nav.solid{background:rgba(246,244,239,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);padding:14px 40px}
+.nav .logo{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:1px}
+.nav .links{display:flex;gap:30px;font-size:14px}
+.nav .links a{position:relative;color:var(--ink2);transition:.3s}
+.nav .links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1.5px;
+  background:var(--accent);transition:.35s}
+.nav .links a:hover{color:var(--ink)}
+.nav .links a:hover::after{width:100%}
+.nav.light .logo,.nav.light .links a{color:#fff}
+.nav.light.solid .logo,.nav.light.solid .links a{color:var(--ink2)}
+@media(max-width:720px){.nav .links{display:none}}
+
+/* ---- 纹理按钮 ---- */
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;
+  padding:14px 30px;border-radius:999px;font-size:15px;font-weight:600;
+  color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-d));
+  box-shadow:0 10px 26px -12px rgba(90,110,80,.9),inset 0 1px 0 rgba(255,255,255,.35);
+  overflow:hidden;cursor:pointer;border:none;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.btn::before{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-18deg);transition:.7s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 34px -14px rgba(90,110,80,1),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn:hover::before{left:130%}
+.btn .arw{transition:transform .4s}
+.btn:hover .arw{transform:translateX(4px)}
+.btn.ghost{color:var(--ink);background:var(--card);
+  box-shadow:var(--shadow-s),inset 0 0 0 1px var(--line)}
+
+/* ---- 首页 HERO ---- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;
+  overflow:hidden;color:#fff}
+.hero .bgwrap{position:absolute;inset:0;z-index:0}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.85;
+  animation:float 14s ease-in-out infinite}
+.hero .b1{width:640px;height:640px;background:radial-gradient(circle at 30% 30%,#aeb99a,#7d8a6c);
+  top:-140px;right:-120px}
+.hero .b2{width:520px;height:520px;background:radial-gradient(circle at 40% 40%,#d8c3a5,#b79a78);
+  bottom:-160px;left:-100px;animation-delay:-5s}
+.hero .b3{width:420px;height:420px;background:radial-gradient(circle at 50% 50%,#c9d2bd,#93a17f);
+  top:35%;left:42%;animation-delay:-9s;opacity:.6}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(120deg,rgba(40,42,36,.55),rgba(40,42,36,.15) 55%,rgba(40,42,36,.5));
+  backdrop-filter:blur(2px)}
+.hero .grain{position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-24px,26px) scale(1.06)}}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero .kicker{font-size:13px;letter-spacing:.4em;text-transform:uppercase;
+  opacity:.85;margin-bottom:22px;overflow:hidden}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(52px,9vw,116px);
+  line-height:.98;letter-spacing:2px;margin-bottom:10px}
+.hero .en{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.4vw,30px);
+  opacity:.9;font-weight:400;margin-bottom:28px}
+.hero .sub{font-size:clamp(15px,1.6vw,19px);max-width:560px;opacity:.94;margin-bottom:38px}
+.hero .metrics{display:flex;gap:44px;flex-wrap:wrap;margin-bottom:44px}
+.hero .metrics .m b{font-family:var(--serif);font-size:40px;font-weight:600;display:block}
+.hero .metrics .m span{font-size:13px;opacity:.8;letter-spacing:.05em}
+.hero .cta{display:flex;gap:16px;flex-wrap:wrap}
+.scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:3;
+  font-size:11px;letter-spacing:.3em;color:rgba(255,255,255,.8);text-align:center}
+.scroll-ind i{display:block;width:1px;height:44px;margin:10px auto 0;
+  background:linear-gradient(rgba(255,255,255,.8),transparent);animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}
+  50.1%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* char split reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}
+
+/* ---- 关于 / 技能 ---- */
+.about{background:var(--bg)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:820px){.grid-2{grid-template-columns:1fr;gap:40px}}
+.radar-wrap{background:var(--card);border-radius:var(--r);padding:30px;
+  box-shadow:var(--shadow);border:1px solid var(--line)}
+.radar-wrap h4{font-size:14px;color:var(--muted);letter-spacing:.1em;margin-bottom:6px;font-weight:600}
+.skillcat{margin-top:26px}
+.skillcat .ttl{font-size:13px;color:var(--accent-d);font-weight:700;
+  letter-spacing:.08em;margin-bottom:10px}
+
+/* ---- 实习时间线 ---- */
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(var(--accent),transparent)}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item::before{content:"";position:absolute;left:-30px;top:6px;width:13px;height:13px;
+  border-radius:50%;background:var(--card);border:3px solid var(--accent)}
+.tl-item h4{font-size:18px;margin-bottom:2px}
+.tl-item .when{font-size:13px;color:var(--muted);margin-bottom:12px}
+.tl-item ul{list-style:none;display:grid;gap:8px}
+.tl-item li{position:relative;padding-left:18px;font-size:14.5px;color:var(--ink2)}
+.tl-item li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;
+  border-radius:50%;background:var(--accent)}
+
+/* ---- 项目入口 ---- */
+.projects{background:linear-gradient(var(--bg),var(--bg2))}
+.pcards{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:56px}
+@media(max-width:900px){.pcards{grid-template-columns:1fr}}
+.pcard{position:relative;border-radius:var(--r);overflow:hidden;background:var(--card);
+  box-shadow:var(--shadow-s);border:1px solid var(--line);cursor:pointer;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.pcard:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.pcard .thumb{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--bg2)}
+.pcard .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.pcard:hover .thumb img{transform:scale(1.08)}
+.pcard .thumb::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(transparent 40%,rgba(30,28,24,.55));opacity:.9}
+.pcard .idx{position:absolute;top:16px;left:18px;z-index:2;font-family:var(--serif);
+  font-size:15px;color:#fff;opacity:.85;letter-spacing:.1em}
+.pcard .ptag{position:absolute;top:16px;right:18px;z-index:2;font-size:11px;color:#fff;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+  padding:4px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+.pcard .meta{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 22px;color:#fff}
+.pcard .meta h3{font-family:var(--serif);font-size:23px;font-weight:600;margin-bottom:3px}
+.pcard .meta p{font-size:13px;opacity:.9}
+.pcard .body{padding:20px 22px 24px}
+.pcard .body .role{font-size:12.5px;color:var(--accent-d);font-weight:700;
+  letter-spacing:.05em;margin-bottom:8px}
+.pcard .body .desc{font-size:14px;color:var(--ink2);margin-bottom:16px;min-height:63px}
+.pcard .enter{display:inline-flex;align-items:center;gap:8px;font-size:14px;
+  font-weight:600;color:var(--ink);transition:.4s}
+.pcard .enter .arw{transition:transform .4s}
+.pcard:hover .enter{color:var(--accent-d)}
+.pcard:hover .enter .arw{transform:translateX(5px)}
+
+/* ---- 联系 ---- */
+.contact{background:var(--ink);color:#efece5;text-align:center}
+.contact .h2{color:#fff}
+.contact .lead{color:rgba(239,236,229,.75);margin:0 auto 34px}
+.cinfo{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.cinfo a,.cinfo span{display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border:1px solid rgba(255,255,255,.16);border-radius:999px;
+  font-size:14px;color:#efece5;transition:.4s;background:rgba(255,255,255,.03)}
+.cinfo a:hover{border-color:var(--accent);background:rgba(138,154,123,.16);transform:translateY(-3px)}
+.foot{padding:30px 0;text-align:center;font-size:12.5px;color:var(--muted);
+  border-top:1px solid var(--line);background:var(--bg)}
+
+/* ============ 项目页 ============ */
+.p-hero{position:relative;min-height:82vh;display:flex;align-items:flex-end;
+  overflow:hidden;color:#fff}
+.p-hero .cover{position:absolute;inset:0;z-index:0}
+.p-hero .cover img{width:100%;height:100%;object-fit:cover;transform:scale(1.03)}
+.p-hero .cover::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(28,25,20,.35),rgba(28,25,20,.15) 40%,rgba(28,25,20,.82))}
+.p-hero .wrap{position:relative;z-index:2;padding-bottom:70px}
+.p-hero .back{display:inline-flex;align-items:center;gap:8px;font-size:13px;
+  color:rgba(255,255,255,.8);margin-bottom:26px;transition:.3s}
+.p-hero .back:hover{color:#fff;gap:12px}
+.p-hero .kind{font-size:12px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--pc,#e0c9a8);font-weight:700;margin-bottom:16px}
+.p-hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(40px,6.5vw,80px);
+  line-height:1.02;letter-spacing:1px;margin-bottom:16px}
+.p-hero .desc{font-size:clamp(15px,1.7vw,19px);max-width:660px;opacity:.94;margin-bottom:24px}
+.p-hero .facts{display:flex;gap:36px;flex-wrap:wrap;margin-top:8px}
+.p-hero .facts .f b{font-family:var(--serif);font-size:26px;display:block}
+.p-hero .facts .f span{font-size:12.5px;opacity:.82}
+
+.p-body{--accent:var(--pc);--accent-d:var(--pcd)}
+.p-sec{padding:96px 0}
+.p-sec.alt{background:var(--bg2)}
+.sec-head{max-width:720px;margin-bottom:52px}
+.sec-head .num{font-family:var(--serif);font-size:15px;color:var(--pc);letter-spacing:.1em;margin-bottom:10px;display:block}
+.sec-head h2{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1.2;margin-bottom:12px}
+.sec-head p{color:var(--ink2);font-size:15px}
+.subh{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.25;margin-bottom:10px}
+.mini-label{font-family:var(--serif);font-size:15px;color:var(--pc);margin-bottom:10px;letter-spacing:.02em}
+
+.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cols-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.cols-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:880px){.cols-3,.cols-4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cols-3,.cols-2,.cols-4{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:26px;box-shadow:var(--shadow-s);transition:transform .5s,box-shadow .5s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.card .ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;
+  justify-content:center;margin-bottom:16px;
+  background:color-mix(in srgb,var(--pc) 15%,#fff);color:var(--pcd)}
+.card .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.card h4{font-size:17px;margin-bottom:8px}
+.card p{font-size:15px;color:var(--ink2);line-height:1.72}
+.card .step{font-family:var(--serif);font-size:14px;color:var(--pc);font-weight:600;margin-bottom:8px}
+
+/* 图片展示 —— 描边只包裹图片本身，文字在框外 */
+.figure{background:transparent;border:none;box-shadow:none;overflow:visible;
+  text-align:center;display:flex;flex-direction:column;align-items:center}
+.figure img{width:100%;display:block;cursor:zoom-in;transition:transform .5s,box-shadow .5s;
+  border:1.5px solid color-mix(in srgb,var(--pc,#c3b49c) 46%,var(--line));
+  border-radius:12px;background:#fff;box-shadow:var(--shadow-s)}
+.figure:hover img{transform:translateY(-4px);box-shadow:var(--shadow)}
+.figure .cap{padding:11px 4px 0;font-size:13px;color:var(--muted);
+  line-height:1.55;text-align:center;width:100%;border:none}
+/* 竖屏截图：等高、描边紧贴图片，无信箱空白 */
+.g-phone img{width:auto;height:440px;max-width:100%}
+.g-tall img{width:auto;height:520px;max-width:100%}
+.cols-4 .g-phone img{height:388px}
+/* 超宽图表：整宽展示 + 点击放大 */
+.figure.wide img{width:100%}
+/* 裁掉图片内部多余白边（顶部对齐保留主体） */
+.figure img.crop-b{object-fit:cover;object-position:top center;aspect-ratio:16/8}
+/* 黑底素材：置于深色展台，黑边融入，看起来是刻意的暗色陈列 */
+.figure.dark img{background:#1b1916;border-color:#3a352d}
+.figure.dark .cap{color:var(--muted)}
+/* 等高图表：统一高度 + 白底信箱，避免参差不齐 */
+.figure.eqh img{width:100%;height:var(--eh,260px);object-fit:contain;background:#fff}
+/* 实拍照片等高但铺满，去掉左右白边 */
+.figure.eqh.cov img{object-fit:cover}
+/* 对比表（白底，取代黑底截图；仿 PPT 卡片风） */
+.cmp-wrap{overflow-x:auto;margin-top:26px;padding:22px;border-radius:20px;
+  background:color-mix(in srgb,var(--pc) 7%,#fff);
+  border:1px solid color-mix(in srgb,var(--pc) 22%,var(--line));box-shadow:var(--shadow-s)}
+.cmp{width:100%;min-width:720px;border-collapse:separate;border-spacing:10px}
+.cmp th,.cmp td{text-align:left;vertical-align:top}
+.cmp thead th{padding:4px 8px 14px;text-align:center;color:var(--ink);
+  font-family:var(--serif);font-size:15px;font-weight:600}
+.cmp .cbrand{display:inline-flex;flex-direction:column;align-items:center;gap:9px}
+.cmp .cbadge{width:52px;height:52px;border-radius:15px;color:#fff;display:flex;
+  align-items:center;justify-content:center;font-family:var(--serif);font-size:24px;box-shadow:var(--shadow-s)}
+.cmp .cname{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:5px 18px;background:#fff}
+.cmp .cbrand small{color:var(--pc);font-size:11.5px;font-family:var(--sans);font-weight:600}
+.cmp tbody th{width:96px;text-align:center;font-weight:700;color:#fff;font-size:14px;line-height:1.4;
+  border-radius:12px;padding:14px 8px;background:linear-gradient(160deg,var(--pc),var(--pcd))}
+.cmp td{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+  font-size:13px;line-height:1.62;color:var(--ink2)}
+.cmp td.hl{background:linear-gradient(165deg,color-mix(in srgb,var(--pc) 16%,#fff),#fff);
+  border-color:color-mix(in srgb,var(--pc) 34%,var(--line))}
+.cmp thead .hl .cname{background:var(--pc);color:#fff;border-color:var(--pc)}
+.cmp-matrix{min-width:920px}
+.cmp-matrix td{font-size:12.5px;padding:12px 13px}
+.gallery{display:grid;gap:22px}
+.cols-3,.cols-2{gap:26px;align-items:start}
+.cols-4{gap:22px;align-items:start}
+
+/* 数据条 */
+.bars{display:grid;gap:16px}
+.bar{}
+.bar .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:7px}
+.bar .top b{color:var(--ink)}
+.bar .top span{color:var(--muted)}
+.bar .track{height:11px;border-radius:999px;background:var(--bg2);overflow:hidden;position:relative}
+.bar .fill{height:100%;border-radius:999px;width:0;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.bar.in .fill{width:var(--w)}
+
+/* 严重度 / 统计块 */
+.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:700px){.statgrid{grid-template-columns:1fr 1fr}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 22px;text-align:center;box-shadow:var(--shadow-s)}
+.stat b{font-family:var(--serif);font-size:42px;font-weight:600;color:var(--pc);display:block;line-height:1}
+.stat span{font-size:13px;color:var(--ink2);margin-top:8px;display:block}
+
+/* 流程链 */
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.flow .node{flex:1;min-width:120px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:18px 16px;text-align:center;position:relative;box-shadow:var(--shadow-s)}
+.flow .node .n{font-family:var(--serif);font-size:13px;color:var(--pc);margin-bottom:6px}
+.flow .node h5{font-size:15px;margin-bottom:5px}
+.flow .node p{font-size:12.5px;color:var(--muted)}
+.flow .arw{display:flex;align-items:center;color:var(--pc);font-size:20px;padding:0 6px;flex:0 0 auto}
+@media(max-width:700px){.flow .arw{transform:rotate(90deg);width:100%;justify-content:center}}
+
+/* 视频 */
+.videobox{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);background:#000}
+.videobox video{width:100%;display:block}
+
+/* 引用/结语 */
+.pull{font-family:var(--serif);font-size:clamp(20px,2.6vw,30px);line-height:1.5;
+  color:var(--ink);max-width:none;font-weight:500;
+  padding:26px 32px;border-left:3px solid var(--pc);border-radius:0 14px 14px 0;
+  background:color-mix(in srgb,var(--pc) 6%,var(--card))}
+.pull .hl{color:var(--pc)}
+
+/* 项目底部导航 */
+.pnext{background:var(--ink);color:#efece5;padding:70px 0;text-align:center}
+.pnext h3{font-family:var(--serif);font-size:30px;margin-bottom:8px;color:#fff}
+.pnext p{color:rgba(239,236,229,.7);margin-bottom:26px}
+.pnext .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---- 灯箱 ---- */
+#lb{position:fixed;inset:0;background:rgba(20,18,15,.94);display:none;
+  align-items:center;justify-content:center;z-index:9999;cursor:zoom-out;padding:40px}
+#lb.show{display:flex}
+#lb img{max-width:94%;max-height:94%;border-radius:6px;
+  box-shadow:0 30px 90px rgba(0,0,0,.7)}
+#lb .x{position:fixed;top:24px;right:34px;color:#fff;font-size:38px;font-weight:200;opacity:.7}
+
+/* scroll progress */
+#prog{position:fixed;top:0;left:0;height:3px;z-index:90;width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent-d))}
+
+/* 图标 sprite */
+.iconset{position:absolute;width:0;height:0;overflow:hidden}
+.rolelist{list-style:none;display:grid;gap:14px;margin-top:8px}
+.rolelist li{display:flex;gap:12px;align-items:flex-start;font-size:15px;
+  color:var(--ink2);line-height:1.6}
+.rolelist svg{width:20px;height:20px;flex:0 0 auto;margin-top:2px;color:var(--pc);
+  fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* 前期调研 —— 比例条 / 图例 / 环形 */
+.ratiobar{display:flex;height:18px;border-radius:999px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow-s)}
+.ratiobar span{display:block;height:100%}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:13.5px;color:var(--ink2)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:middle}
+.donut-wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.donut{width:148px;height:148px;border-radius:50%;position:relative;flex:0 0 auto;box-shadow:var(--shadow-s)}
+.donut::after{content:"";position:absolute;inset:24px;background:var(--card);border-radius:50%}
+.donut b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;z-index:2;font-family:var(--serif);font-size:15px;color:var(--ink2);text-align:center}
+.donut b em{font-size:26px;color:var(--pc);font-style:normal;line-height:1}
+/* 竞品对比 高亮卡 */
+.card.hl-card{background:linear-gradient(150deg,color-mix(in srgb,var(--pc) 12%,#fff),var(--card));
+  border-color:color-mix(in srgb,var(--pc) 30%,var(--line))}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{font-size:13px;padding:6px 13px;border-radius:999px;background:var(--bg2);
+  border:1px solid var(--line);color:var(--ink2)}
+
+/* ---- 动效增强 ---- */
+.card .ic{transition:transform .5s cubic-bezier(.2,.8,.2,1),background .4s}
+.card:hover .ic{transform:translateY(-3px) rotate(-4deg) scale(1.08)}
+.card:hover .ic svg{transform:scale(1.04)}
+.stat{transition:transform .5s,box-shadow .5s}
+.stat:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.rolelist li{transition:transform .4s}
+.rolelist li:hover{transform:translateX(4px)}
+.rolelist li:hover svg{transform:scale(1.15)}
+.rolelist svg{transition:transform .4s}
+.chip{transition:transform .3s,border-color .3s,background .3s}
+.chip:hover{transform:translateY(-2px);border-color:var(--pc);color:var(--pcd)}
+.flow .node{transition:transform .5s,box-shadow .5s}
+.flow .node:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.flow .arw{animation:arwpulse 1.8s ease-in-out infinite}
+@keyframes arwpulse{0%,100%{opacity:.55;transform:translateX(0)}50%{opacity:1;transform:translateX(3px)}}
+
+/* 雷达图入场动效 */
+.radar-data,.radar-dots,.radar-spokes{transform-box:fill-box;transform-origin:center;
+  opacity:0}
+.reveal.in .radar-spokes{animation:radarSpokes .8s .1s ease-out forwards}
+.reveal.in .radar-data{animation:radarIn 1.1s .25s cubic-bezier(.2,.8,.2,1) forwards}
+.reveal.in .radar-dots{animation:radarDots .5s 1.1s ease-out forwards}
+@keyframes radarSpokes{from{opacity:0}to{opacity:1}}
+@keyframes radarIn{from{opacity:0;transform:scale(.35)}to{opacity:1;transform:scale(1)}}
+@keyframes radarDots{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+
+/* 图片入场：轻微上浮放大 */
+.figure.reveal img,.reveal .figure img{will-change:transform}
+.pop{opacity:0;transform:translateY(24px) scale(.98);
+  transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.pop.in{opacity:1;transform:none}
+
+.pageview{display:none}
+.pageview.active{display:block}
+#pv-dianping{--pc:#d98a5c;--pcd:#b96f43;--accent:#d98a5c;--accent-d:#b96f43}
+#pv-yiyou{--pc:#9c6a41;--pcd:#683a24;--accent:#9c6a41;--accent-d:#683a24}
+#pv-ziban{--pc:#e0995a;--pcd:#c47a34;--accent:#e0995a;--accent-d:#c47a34}
+
+/* ===== 薛定谔的聊斋镇 · AIGC 游戏项目 ===== */
+#pv-liaozhai{--pc:#657b72;--pcd:#40584f;--accent:#657b72;--accent-d:#40584f}
+.lz-hero .cover img{object-position:center center;filter:saturate(.9) contrast(.98)}
+.lz-hero .cover::after{background:linear-gradient(180deg,rgba(18,24,22,.28),rgba(18,24,22,.18) 38%,rgba(18,24,22,.88))}
+.ai-strip{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.ai-pill{font-size:12px;padding:7px 13px;border-radius:999px;border:1px solid color-mix(in srgb,var(--pc) 28%,var(--line));background:color-mix(in srgb,var(--pc) 7%,#fff);color:var(--pcd);font-weight:650}
+.lz-note{padding:24px 26px;border-radius:16px;background:linear-gradient(145deg,color-mix(in srgb,var(--pc) 9%,#fff),#fff);border:1px solid color-mix(in srgb,var(--pc) 25%,var(--line));box-shadow:var(--shadow-s)}
+.lz-note b{display:block;font-family:var(--serif);font-size:20px;margin-bottom:7px}.lz-note p{font-size:14px;color:var(--ink2)}
+.workflow{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;align-items:stretch}
+.workflow .wf{position:relative;min-height:172px;padding:20px 15px;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-s);transition:.45s}
+.workflow .wf:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--pc) 42%,var(--line))}
+.workflow .wf:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--pc);font-size:17px;z-index:2}
+.workflow .n{font-family:var(--serif);font-size:12px;color:var(--pc);margin-bottom:10px}.workflow h4{font-size:15px;line-height:1.35;margin-bottom:8px}.workflow p{font-size:12.5px;line-height:1.55;color:var(--muted)}
+@media(max-width:980px){.workflow{grid-template-columns:repeat(2,1fr)}.workflow .wf:not(:last-child)::after{display:none}}
+@media(max-width:560px){.workflow{grid-template-columns:1fr}}
+.pipeline{display:grid;grid-template-columns:1fr 56px 1fr 56px 1fr;align-items:center;gap:8px}
+.pipeline .stage{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:144px;box-shadow:var(--shadow-s)}
+.pipeline .stage b{font-family:var(--serif);font-size:18px;display:block;margin-bottom:7px}.pipeline .stage p{font-size:13px;color:var(--ink2)}.pipeline .go{text-align:center;color:var(--pc);font-size:24px}
+@media(max-width:700px){.pipeline{grid-template-columns:1fr}.pipeline .go{transform:rotate(90deg)}}
+.role-matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.role-matrix .rm{border-radius:14px;padding:18px;background:var(--card);border:1px solid var(--line)}.role-matrix .rm b{font-family:var(--serif);font-size:16px}.role-matrix .rm span{display:block;color:var(--muted);font-size:12.5px;margin-top:5px}@media(max-width:700px){.role-matrix{grid-template-columns:1fr 1fr}}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:22px}.compare .side{padding:28px;border-radius:18px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow-s)}.compare .side.ai{border-color:color-mix(in srgb,var(--pc) 35%,var(--line));background:linear-gradient(150deg,color-mix(in srgb,var(--pc) 10%,#fff),#fff)}.compare h4{font-family:var(--serif);font-size:21px;margin-bottom:16px}.compare ul{list-style:none;display:grid;gap:11px}.compare li{font-size:14px;color:var(--ink2);padding-left:18px;position:relative}.compare li:before{content:'•';position:absolute;left:0;color:var(--pc)}@media(max-width:700px){.compare{grid-template-columns:1fr}}
+.toolgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.toolcard{padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow-s)}.toolcard .tool{font-family:var(--serif);font-size:19px;color:var(--pcd);margin-bottom:5px}.toolcard .use{font-size:13px;color:var(--muted);margin-bottom:12px}.toolcard p{font-size:14px;color:var(--ink2)}@media(max-width:760px){.toolgrid{grid-template-columns:1fr}}
+.resultband{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.resultband .rb{padding:22px;border-radius:16px;background:color-mix(in srgb,var(--pc) 8%,#fff);border:1px solid color-mix(in srgb,var(--pc) 24%,var(--line));text-align:center}.resultband b{font-family:var(--serif);font-size:28px;color:var(--pcd);display:block}.resultband span{font-size:12.5px;color:var(--ink2)}@media(max-width:700px){.resultband{grid-template-columns:1fr 1fr}}
+.img-pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}@media(max-width:720px){.img-pair{grid-template-columns:1fr}}
+.lz-caption{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+
+/* ===== 聊斋镇 · 本轮素材展示优化 ===== */
+.lz-map-pair{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;max-width:780px;margin:30px auto 0}
+.lz-map-pair .figure{min-width:0}
+.lz-map-pair .figure img{width:auto;height:350px;max-width:100%;object-fit:contain;margin:0 auto}
+.lz-map-pair .cap{max-width:330px;margin:0 auto}
+.lz-game-title{margin:54px 0 22px;text-align:center}
+.lz-game-title .mini-label{margin-bottom:6px}
+.lz-game-title p{font-size:14px;color:var(--muted);max-width:700px;margin:0 auto}
+.lz-shot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
+.lz-shot-grid .figure img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px}
+.lz-shot-grid .figure .cap{font-size:12.5px;line-height:1.5;padding-top:9px}
+.lz-shot-grid .figure .cap b{display:block;color:var(--ink2);font-size:13px;margin-bottom:2px;font-weight:650}
+.lz-demo-wrap{max-width:960px;margin:0 auto}
+.lz-demo-wrap .videobox{background:#111;border-color:color-mix(in srgb,var(--pc) 28%,var(--line))}
+.lz-demo-wrap video{width:100%;max-height:72vh;display:block;background:#111}
+.lz-demo-note{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
+@media(max-width:900px){.lz-shot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lz-map-pair{max-width:650px}.lz-map-pair .figure img{height:310px}}
+@media(max-width:620px){.lz-map-pair{grid-template-columns:1fr;max-width:360px}.lz-map-pair .figure img{height:300px}.lz-shot-grid{grid-template-columns:1fr}}
+
+/* ===== 崇山·瀚海 · AI Agent 山海经文化体验平台 ===== */
+#pv-shanhai{--pc:#6b8f82;--pcd:#29453d;--accent:#6b8f82;--accent-d:#29453d}
+#pv-shanhai .sh-hero .cover img{object-position:center center;filter:saturate(.84) contrast(.98)}
+#pv-shanhai .sh-hero .cover::after{background:linear-gradient(180deg,rgba(14,22,20,.18),rgba(14,22,20,.08) 36%,rgba(14,22,20,.82))}
+#pv-shanhai .p-body{position:relative;isolation:isolate;overflow:hidden;background:
+  linear-gradient(180deg,#f7f6f1 0%,#f4f2ec 48%,#f7f6f1 100%)}
+#pv-shanhai .p-body::before,#pv-shanhai .p-body::after{
+  content:"";position:absolute;left:-5%;right:-5%;height:360px;pointer-events:none;z-index:-1;opacity:.16;
+  background:
+    radial-gradient(ellipse at 13% 68%,rgba(18,28,25,.55) 0 7%,transparent 8%),
+    radial-gradient(ellipse at 25% 72%,rgba(18,28,25,.35) 0 9%,transparent 10%),
+    radial-gradient(ellipse at 48% 77%,rgba(18,28,25,.22) 0 12%,transparent 13%),
+    radial-gradient(ellipse at 70% 70%,rgba(18,28,25,.34) 0 10%,transparent 11%),
+    radial-gradient(ellipse at 89% 75%,rgba(18,28,25,.48) 0 7%,transparent 8%),
+    linear-gradient(176deg,transparent 0 56%,rgba(21,31,29,.2) 57% 59%,transparent 60%),
+    repeating-radial-gradient(ellipse at 35% 82%,rgba(20,30,28,.12) 0 1px,transparent 1px 9px);
+  filter:blur(.2px)
+}
+#pv-shanhai .p-body::before{top:0}
+#pv-shanhai .p-body::after{bottom:0;transform:scaleY(-1)}
+#pv-shanhai .sh-intro{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch}
+#pv-shanhai .sh-intro .card{height:100%}
+#pv-shanhai .sh-quote{padding:28px 30px;border-radius:18px;border:1px solid color-mix(in srgb,var(--pc) 26%,var(--line));
+  background:linear-gradient(145deg,color-mix(in srgb,var(--pc) 9%,#fff),rgba(255,255,255,.9));box-shadow:var(--shadow-s)}
+#pv-shanhai .sh-quote b{font-family:var(--serif);font-size:22px;display:block;margin-bottom:12px}
+#pv-shanhai .sh-quote p{font-size:14px;color:var(--ink2);line-height:1.82}
+#pv-shanhai .sh-module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+#pv-shanhai .sh-module{padding:0;overflow:hidden}
+#pv-shanhai .sh-module .figure img{border-radius:16px 16px 0 0;border:0;box-shadow:none;aspect-ratio:16/9;object-fit:cover}
+#pv-shanhai .sh-module .txt{padding:22px 24px 25px}
+#pv-shanhai .sh-module .txt .k{font-size:11px;letter-spacing:.2em;color:var(--pcd);font-weight:800;margin-bottom:7px}
+#pv-shanhai .sh-module .txt h4{font-family:var(--serif);font-size:22px;margin-bottom:8px}
+#pv-shanhai .sh-module .txt p{font-size:14px;color:var(--ink2);line-height:1.76}
+#pv-shanhai .sh-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+#pv-shanhai .sh-wide{max-width:980px;margin:0 auto}
+#pv-shanhai .sh-wide img{max-height:700px;object-fit:contain;background:rgba(255,255,255,.78)}
+#pv-shanhai .sh-tech{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+#pv-shanhai .sh-tech .card{padding:22px}
+#pv-shanhai .sh-tech .n{font-family:var(--serif);font-size:13px;color:var(--pc);margin-bottom:8px}
+#pv-shanhai .sh-tech h4{font-size:17px;margin-bottom:7px}
+#pv-shanhai .sh-tech p{font-size:13px;color:var(--ink2);line-height:1.65}
+#pv-shanhai .sh-demo{max-width:980px;margin:0 auto}
+#pv-shanhai .sh-demo video{width:100%;max-height:76vh;display:block;background:#0b0d0c}
+#pv-shanhai .sh-demo-note{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
+#pv-shanhai .sh-smallcap{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+@media(max-width:860px){
+  #pv-shanhai .sh-intro,#pv-shanhai .sh-data-grid{grid-template-columns:1fr}
+  #pv-shanhai .sh-tech{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  #pv-shanhai .sh-module-grid,#pv-shanhai .sh-tech{grid-template-columns:1fr}
+}
+
+
+/* ===== 崇山·瀚海 · 高清素材与版式修正 ===== */
+#pv-shanhai .p-body{position:relative;isolation:auto;overflow:visible;background:var(--bg)}
+#pv-shanhai .p-body::before,#pv-shanhai .p-body::after{display:none!important;content:none!important;background:none!important}
+
+/* 双图并排：等高、等视觉重量 */
+#pv-shanhai .sh-data-grid{grid-template-columns:1fr 1fr;gap:34px;align-items:stretch}
+#pv-shanhai .sh-data-grid .figure{height:100%;justify-content:flex-start}
+#pv-shanhai .sh-data-grid .figure img{width:100%;height:360px;object-fit:contain}
+
+/* 透明底素材直接放在项目背景上，不加白底、描边、投影 */
+#pv-shanhai img[alt="崇山瀚海用户分析"],
+#pv-shanhai img[alt="崇山瀚海用户流程图"],
+#pv-shanhai img[alt="崇山瀚海平台信息架构"],
+#pv-shanhai img[alt="崇山瀚海设计规范"],
+#pv-shanhai img[alt="崇山瀚海技术路线"],
+#pv-shanhai .sh-transparent img{
+  background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important
+}
+#pv-shanhai .figure:hover img[alt="崇山瀚海用户分析"],
+#pv-shanhai .figure:hover img[alt="崇山瀚海用户流程图"],
+#pv-shanhai .figure:hover img[alt="崇山瀚海平台信息架构"],
+#pv-shanhai .figure:hover img[alt="崇山瀚海设计规范"],
+#pv-shanhai .figure:hover img[alt="崇山瀚海技术路线"],
+#pv-shanhai .sh-transparent:hover img{box-shadow:none!important}
+
+#pv-shanhai .sh-wide{max-width:1120px}
+#pv-shanhai img[alt="崇山瀚海平台信息架构"]{max-width:1080px;height:auto;max-height:none!important;margin:0 auto;object-fit:contain}
+#pv-shanhai img[alt="崇山瀚海设计规范"]{max-width:1080px;height:auto;max-height:none!important;margin:0 auto;object-fit:contain}
+#pv-shanhai img[alt="崇山瀚海技术路线"]{max-width:1120px;height:auto;max-height:none!important;margin:0 auto;object-fit:contain}
+
+/* 四个功能首页：透明底，两列同高 */
+#pv-shanhai .sh-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 30px;align-items:stretch;max-width:1120px;margin:8px auto 44px}
+#pv-shanhai .sh-home-grid .figure{min-width:0}
+#pv-shanhai .sh-home-grid .figure img{width:100%;height:360px;object-fit:contain}
+#pv-shanhai .sh-home-grid .cap{padding-top:7px}
+#pv-shanhai .sh-inner{max-width:1120px;margin:0 auto}
+#pv-shanhai .sh-inner img{width:100%;height:auto;max-height:none;object-fit:contain}
+
+/* 核心功能截图保持统一比例 */
+#pv-shanhai .sh-module .figure img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:transparent}
+
+@media(max-width:860px){
+  #pv-shanhai .sh-data-grid{grid-template-columns:1fr}
+  #pv-shanhai .sh-data-grid .figure img{height:auto;max-height:520px}
+  #pv-shanhai .sh-home-grid{grid-template-columns:1fr 1fr}
+  #pv-shanhai .sh-home-grid .figure img{height:300px}
+}
+@media(max-width:620px){
+  #pv-shanhai .sh-home-grid{grid-template-columns:1fr}
+  #pv-shanhai .sh-home-grid .figure img{height:auto}
+}
+
+/* ===== 六项目版本：统一返回键 + 应·季 ===== */
+.project-back-float{
+  position:fixed;left:22px;top:20px;z-index:140;display:inline-flex;align-items:center;gap:8px;
+  height:42px;padding:0 16px;border:1px solid rgba(255,255,255,.34);border-radius:999px;
+  background:rgba(24,24,22,.46);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:#fff;font:600 13px var(--sans);letter-spacing:.03em;cursor:pointer;
+  box-shadow:0 8px 26px rgba(0,0,0,.16);transition:.3s;
+}
+.project-back-float:hover{transform:translateX(-3px);background:rgba(24,24,22,.72);border-color:rgba(255,255,255,.58)}
+@media(max-width:680px){.project-back-float{left:12px;top:12px;height:38px;padding:0 12px;font-size:12px}}
+
+#pv-yingji{--pc:#ee607c;--pcd:#c93f5d;--accent:#ee607c;--accent-d:#c93f5d}
+.yj-hero .cover img{object-position:center center;filter:saturate(.94) contrast(1.02)}
+.yj-hero .cover::after{background:linear-gradient(180deg,rgba(20,18,18,.10),rgba(20,18,18,.12) 42%,rgba(20,18,18,.84))}
+.yj-pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.yj-pill{padding:7px 13px;border-radius:999px;font-size:12px;font-weight:650;color:var(--pcd);background:color-mix(in srgb,var(--pc) 8%,#fff);border:1px solid color-mix(in srgb,var(--pc) 28%,var(--line))}
+.yj-insight{padding:24px 26px;border-radius:18px;border:1px solid color-mix(in srgb,var(--pc) 25%,var(--line));background:linear-gradient(150deg,color-mix(in srgb,var(--pc) 8%,#fff),#fff);box-shadow:var(--shadow-s)}
+.yj-insight b{font-family:var(--serif);font-size:20px;display:block;margin-bottom:7px}.yj-insight p{font-size:14px;color:var(--ink2)}
+.yj-statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+.yj-stat{padding:22px 18px;text-align:center;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-s)}
+.yj-stat b{display:block;font:600 34px var(--serif);color:var(--pc);line-height:1.1}.yj-stat span{font-size:12.5px;color:var(--ink2)}
+.yj-feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.yj-feature{padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow-s)}
+.yj-feature b{display:block;font:600 18px var(--serif);margin-bottom:7px;color:var(--pcd)}.yj-feature p{font-size:14px;color:var(--ink2)}
+.yj-layer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.yj-layer{padding:25px;border-radius:17px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-s)}
+.yj-layer .n{font:600 13px var(--serif);color:var(--pc);margin-bottom:6px}.yj-layer h4{font-size:18px;margin-bottom:8px}.yj-layer p{font-size:14px;color:var(--ink2)}
+.yj-eq2{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+.yj-eq2 .figure{height:100%}.yj-eq2 .figure img{width:100%;height:410px;object-fit:contain;background:#fff}
+.yj-wide{max-width:1080px;margin-left:auto;margin-right:auto}
+.yj-wide img{width:100%;height:auto;object-fit:contain}
+.yj-slide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 28px;align-items:start}
+.yj-slide-grid .figure img{width:100%;aspect-ratio:16/9;object-fit:contain;background:#fff}
+.yj-ui-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 28px;align-items:start}
+.yj-ui-grid .figure img{width:100%;aspect-ratio:16/9;object-fit:contain;background:#fff}
+.yj-milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.yj-milestone{padding:24px;border-radius:16px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow-s)}
+.yj-milestone .time{font:600 14px var(--serif);color:var(--pc);margin-bottom:5px}.yj-milestone h4{font-size:18px;margin-bottom:9px}.yj-milestone p{font-size:13.5px;color:var(--ink2)}
+@media(max-width:900px){.yj-feature-grid,.yj-layer-grid,.yj-milestones{grid-template-columns:1fr 1fr}.yj-statgrid{grid-template-columns:1fr 1fr}.yj-eq2 .figure img{height:340px}}
+@media(max-width:640px){.yj-feature-grid,.yj-layer-grid,.yj-milestones,.yj-eq2,.yj-slide-grid,.yj-ui-grid{grid-template-columns:1fr}.yj-eq2 .figure img{height:auto}}
+
+</style></head><body><div class="pageview" id="pv-index">
+
+
+<!-- SVG 图标库 -->
+<svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M9 14.5L7 22l5-3 5 3-2-7.5"/></symbol>
+ <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+ <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 5a2 2 0 012-2z"/></symbol>
+ <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H8l-4 4V6a2 2 0 012-2h13a2 2 0 012 2z"/><path d="M8 9h8M8 12h5"/></symbol>
+</svg>
+
+<!-- 顶栏 -->
+<nav class="nav light">
+  <div class="logo">Interaction Design <span style="opacity:.6;font-size:13px">Portfolio</span></div>
+  <div class="links">
+    <a href="#about">关于</a>
+    <a href="#exp">经历</a>
+    <a href="#projects">项目</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bgwrap">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+    <div class="veil"></div><div class="grain"></div>
+  </div>
+  <div class="wrap">
+    <div class="kicker reveal">智能交互设计 · Intelligent Interaction Design</div>
+    <h1 class="reveal d1">设计有温度<br>的人机对话</h1>
+    <div class="en reveal d2">Where research meets craft.</div>
+    <p class="sub reveal d3">聚焦智能交互、游戏体验与 AIGC 工作流，从研究、信息架构到界面、原型与技术落地，
+      探索 AI 如何真正进入设计与制作流程。</p>
+    <div class="metrics reveal d4">
+      <div class="m"><b data-count="6">0</b><span>完整项目</span></div>
+      <div class="m"><b>AI × UX</b><span>核心方法</span></div>
+      <div class="m"><b>Web</b><span>交互落地</span></div>
+      <div class="m"><b>End-to-End</b><span>完整流程</span></div>
+    </div>
+    <div class="cta reveal d5">
+      <a href="#projects" class="btn">浏览项目 <span class="arw">→</span></a>
+      <a href="#about" class="btn ghost">了解我</a>
+    </div>
+  </div>
+  <div class="scroll-ind">SCROLL<i></i></div>
+</header>
+
+<!-- 关于 / 能力 -->
+<section class="sec about" id="about">
+  <div class="wrap">
+    <div class="grid-2">
+      <div>
+        <div class="eyebrow reveal">About</div>
+        <h2 class="h2 reveal d1">用交互设计<br>连接人与技术</h2>
+        <p class="lead reveal d2" style="margin-bottom:22px">
+          对互联网与游戏产品保持高度关注，熟悉开发流程与智能工作流。有较强的需求分析与交互设计能力，
+          能承担页面设计、痛点挖掘与工作流搭建，致力于以真实用户需求驱动效率提升。</p>
+        <div class="reveal d3">
+          <div class="skillcat">
+            <div class="ttl">设计 · 研究</div>
+            <span class="tag">Figma</span><span class="tag">Photoshop</span><span class="tag">AIGC</span>
+            <span class="tag">用户研究</span><span class="tag">眼动测试</span>
+          </div>
+          <div class="skillcat">
+            <div class="ttl">前端 · 落地</div>
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+            <span class="tag">AI Coding</span><span class="tag">Unity</span>
+          </div>
+          <div class="skillcat">
+            <div class="ttl">三维 · 工程</div>
+            <span class="tag">Blender</span><span class="tag">Rhino</span>
+            <span class="tag">Solidworks</span><span class="tag">Python</span>
+          </div>
+        </div>
+      </div>
+      <div class="radar-wrap reveal d2">
+        <h4>能力自评 · Capability</h4>
+        <svg viewBox="0 0 300 300" width="100%" style="max-width:420px;margin:0 auto;display:block">
+          <g fill="none" stroke="#e7e2d9" stroke-width="1">
+            <polygon points="150,40 245.3,95 245.3,205 150,260 54.7,205 54.7,95"/>
+            <polygon points="150,95 197.6,122.5 197.6,177.5 150,205 102.4,177.5 102.4,122.5"/>
+          </g>
+          <g class="radar-spokes" stroke="#e7e2d9" stroke-width="1">
+            <line x1="150" y1="150" x2="150" y2="40"/>
+            <line x1="150" y1="150" x2="245.3" y2="95"/>
+            <line x1="150" y1="150" x2="245.3" y2="205"/>
+            <line x1="150" y1="150" x2="150" y2="260"/>
+            <line x1="150" y1="150" x2="54.7" y2="205"/>
+            <line x1="150" y1="150" x2="54.7" y2="95"/>
+          </g>
+          <polygon class="radar-data" points="150,51 231,103.3 233.8,198.4 150,238 62.4,200.6 78.6,108.8"
+            fill="rgba(138,154,123,.28)" stroke="#8a9a7b" stroke-width="2"/>
+          <g class="radar-dots" fill="#8a9a7b">
+            <circle cx="150" cy="51" r="3.4"/><circle cx="231" cy="103.3" r="3.4"/>
+            <circle cx="233.8" cy="198.4" r="3.4"/><circle cx="150" cy="238" r="3.4"/>
+            <circle cx="62.4" cy="200.6" r="3.4"/><circle cx="78.6" cy="108.8" r="3.4"/>
+          </g>
+          <g fill="#57524b" font-size="12.5" font-family="sans-serif">
+            <text x="150" y="28" text-anchor="middle">交互设计</text>
+            <text x="256" y="90" text-anchor="start">需求分析</text>
+            <text x="256" y="214" text-anchor="start">视觉设计</text>
+            <text x="150" y="280" text-anchor="middle">前端实现</text>
+            <text x="44" y="214" text-anchor="end">AIGC 应用</text>
+            <text x="44" y="90" text-anchor="end">三维建模</text>
+          </g>
+        </svg>
+        <p style="font-size:12.5px;color:var(--muted);text-align:center;margin-top:6px">
+          综合课程、竞赛与项目实践的能力自评</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 匿名版 · 实践经历与荣誉 -->
+<section class="sec" id="exp" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="eyebrow reveal">Experience & Recognition</div>
+    <h2 class="h2 reveal d1" style="margin-bottom:50px">实践经历与荣誉</h2>
+    <div class="grid-2" style="align-items:start">
+      <div class="reveal d2">
+        <div class="timeline">
+          <div class="tl-item">
+            <h4>游戏交互设计 · 实习经历</h4>
+            <div class="when">Interaction / UX Design Internship</div>
+            <ul>
+              <li>参与 AI 智能任务编排设计，以 AI Coding 探索游戏个性化路径与任务组织方式。</li>
+              <li>参与大型游戏活动与周年玩法 UX，完成组件、交互文档、多端适配及开发协作。</li>
+              <li>负责版本活动页面与玩法设计，并将生成式 AI 工作流引入素材生产和方案迭代。</li>
+              <li>参与新项目研发前期调研，包括竞品拆解、操作反馈比较与体验路径分析。</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <h4>智能交互设计 · 本科阶段训练</h4>
+            <div class="when">Interaction Design / AI / Creative Technology</div>
+            <ul>
+              <li>设计与研究：智能交互、移动交互、设计心理、用户研究与 Web 前端。</li>
+              <li>智能技术：机器学习、深度学习、AI 创新设计、VR / AR 交互。</li>
+              <li>数字制作：Unity、Blender、Rhino、Python 与数字化生成。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d3">
+        <div class="card">
+          <div class="ttl" style="font-size:13px;color:var(--accent-d);font-weight:700;letter-spacing:.08em;margin-bottom:14px">荣誉 · Selected Awards</div>
+          <ul style="list-style:none;display:grid;gap:12px">
+            <li style="display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--ink2)"><svg style="width:18px;height:18px;flex:0 0 auto;margin-top:2px;color:var(--accent-d);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><use href="#i-award"/></svg><span>全国数字艺术设计赛事 · 国赛二等奖</span></li>
+            <li style="display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--ink2)"><svg style="width:18px;height:18px;flex:0 0 auto;margin-top:2px;color:var(--accent-d);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><use href="#i-award"/></svg><span>大学生文创设计赛事 · 专业组一等奖</span></li>
+            <li style="display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--ink2)"><svg style="width:18px;height:18px;flex:0 0 auto;margin-top:2px;color:var(--accent-d);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><use href="#i-award"/></svg><span>大学生工业设计赛事 · 一等奖</span></li>
+            <li style="display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--ink2)"><svg style="width:18px;height:18px;flex:0 0 auto;margin-top:2px;color:var(--accent-d);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round"><use href="#i-award"/></svg><span>数字艺术设计赛事 · 省赛二等奖</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 项目入口 -->
+<section class="sec projects" id="projects">
+  <div class="wrap">
+    <div class="eyebrow reveal">Selected Works</div>
+    <h2 class="h2 reveal d1">六个完整项目<br>六种设计思考</h2>
+    <p class="lead reveal d2">从文化 AR、适老化产品、可用性研究，到 AI 文化体验、AIGC 游戏与全周期健康服务——六个项目呈现从洞察、系统设计到交互与技术落地的完整设计路径。点击进入查看设计思路。</p>
+    <div class="pcards">
+<div class="pcard reveal d3" data-href="javascript:void 0" onclick="showPage('yiyou');return false">
+        <div class="thumb"><img src="assets-5/media_012.png" alt="艺游八绝">
+          <span class="idx">01</span><span class="ptag">文化 AR</span>
+          <div class="meta"><h3>艺游八绝 · AR 导览</h3><p>燕京八绝博物馆 · 非遗活化</p></div>
+        </div>
+        <div class="body">
+          <div class="role">UI 设计 · 手势交互 · IP</div>
+          <div class="desc">以五维设计思路串联 AR 集卡、IP 情感叙事、AIGC 技艺视频与 TouchDesigner 手势交互，让非遗"可看可学可玩可触"。</div>
+          <span class="enter">查看设计思路 <span class="arw">→</span></span>
+        </div>
+      </div>
+<div class="pcard reveal d4" data-href="javascript:void 0" onclick="showPage('ziban');return false">
+        <div class="thumb"><img src="assets-6/media_027.png" alt="兹伴老年用户一手调研">
+          <span class="idx">02</span><span class="ptag">适老化产品</span>
+          <div class="meta"><h3>兹伴 · 记忆追溯 App</h3><p>面向老人的认知训练</p></div>
+        </div>
+        <div class="body">
+          <div class="role">产品经理 · 适老化交互</div>
+          <div class="desc">从养老社区一手调研出发，以认知负荷分析驱动"智能介入矩阵"，构建上传—训练—回溯的记忆闭环，落地图像与语音双智能体。</div>
+          <span class="enter">查看设计思路 <span class="arw">→</span></span>
+        </div>
+      </div>
+<div class="pcard reveal d2" data-href="javascript:void 0" onclick="showPage('dianping');return false">
+        <div class="thumb"><img src="assets-7/media_072.jpg" alt="大众点评可用性测试">
+          <span class="idx">03</span><span class="ptag">可用性研究</span>
+          <div class="meta"><h3>大众点评 · 可用性评估</h3><p>眼动 × 问卷 × 访谈 三角验证</p></div>
+        </div>
+        <div class="body">
+          <div class="role">用户研究 · 数据可视化</div>
+          <div class="desc">7 名被试 × 5 项核心任务，用眼动热力图与非重叠轨迹图交叉验证，定位 18 项可用性问题并输出改进方案。</div>
+          <span class="enter">查看设计思路 <span class="arw">→</span></span>
+        </div>
+      </div>
+<div class="pcard reveal d2" data-href="javascript:void 0" onclick="showPage('shanhai');return false">
+        <div class="thumb"><img src="assets-5/media_013.png" alt="崇山瀚海 · 山海经互动探索平台" style="object-position:center center">
+          <span class="idx">04</span><span class="ptag">AI Agent · 文化体验</span>
+          <div class="meta"><h3>崇山·瀚海</h3><p>视觉小说 · AI 创作 · 社区 · 图鉴</p></div>
+        </div>
+        <div class="body"><div class="role">体验式网页平台 · AI Agent / AIGC</div>
+          <div class="desc">以《山海经》为文化母题，将 Ren’Py 视觉小说、ComfyUI AI 绘画、社区交流与数字图鉴组织为可探索、可创作、可分享的一体化体验。</div>
+          <span class="enter">查看平台设计思路 <span class="arw">→</span></span>
+        </div>
+      </div>
+<div class="pcard reveal d1" data-href="javascript:void 0" onclick="showPage('liaozhai');return false">
+        <div class="thumb"><img src="assets-6/media_028.webp" alt="薛定谔的聊斋镇 AIGC 游戏项目" style="object-position:center 42%">
+          <span class="idx">05</span><span class="ptag">AIGC 游戏制作</span>
+          <div class="meta"><h3>薛定谔的聊斋镇</h3><p>自由探索 · 卡牌剧情 · Unity / Steam</p></div>
+        </div>
+        <div class="body"><div class="role">独立设计与制作 · AIGC Workflow</div><div class="desc">把 ChatGPT、HoloPix、Gemini、Codex、Suno 等工具串成角色、美术、剧情、代码、CG 与音乐的一体化制作工作流。</div><span class="enter">查看 AIGC 制作思路 <span class="arw">→</span></span></div>
+      </div>
+
+<div class="pcard reveal d3" data-href="javascript:void 0" onclick="showPage('yingji');return false">
+  <div class="thumb"><img src="assets-3/media_003.png" alt="应季 SeasonEase 过敏全周期服务系统" style="object-position:center center">
+    <span class="idx">06</span><span class="ptag">AI 服务系统 · 健康体验</span>
+    <div class="meta"><h3>应·季 SeasonEase</h3><p>多源数据融合 · 生理监测 · 全周期服务</p></div>
+  </div>
+  <div class="body"><div class="role">服务设计 · AI 决策系统 · App / Watch</div><div class="desc">以动态花粉风险、生理数据与行为记录为基础，将预警、防护、应急与长期管理串成可持续的过敏全周期服务闭环。</div><span class="enter">查看系统设计 <span class="arw">→</span></span></div>
+</div>
+</div>
+  </div>
+</section>
+
+<div class="foot">Interaction Design Portfolio · Selected Works</div>
+</div>
+<div class="pageview" id="pv-dianping">
+
+
+<!-- SVG 图标库 -->
+<svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+ <symbol id="i-sitemap" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></symbol>
+ <symbol id="i-clip" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 13l2 2 4-4"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+ <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+ <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+ <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H8l-4 4V6a2 2 0 012-2h13a2 2 0 012 2z"/><path d="M8 9h8M8 12h5"/></symbol>
+ <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0012 3z"/></symbol>
+ <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></symbol>
+ <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></symbol>
+ <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 4h13l-2 5 2 5H4"/></symbol>
+ <symbol id="i-city" viewBox="0 0 24 24"><path d="M3 21h18M6 21V8l5-3v16M11 21V5l7 4v12M9 12h0M9 16h0M15 12h0M15 16h0"/></symbol>
+</svg>
+
+<nav class="nav light">
+  <div class="logo"><a href="javascript:void 0" onclick="showPage('index');return false">← </a></div>
+  <div class="links"><a href="javascript:void 0" onclick="showPage('index','projects');return false">全部项目</a><a href="javascript:void 0" onclick="showPage('yiyou');return false">艺游八绝</a><a href="javascript:void 0" onclick="showPage('ziban');return false">兹伴</a></div>
+</nav>
+
+<!-- HERO -->
+<header class="p-hero">
+  <div class="cover"><img src="assets-7/media_072.jpg" alt="大众点评可用性测试现场"></div>
+  <div class="wrap">
+    <a href="javascript:void 0" onclick="showPage('index');return false" class="back">← 返回首页</a>
+    <div class="kind">Usability Research · 可用性研究</div>
+    <h1>大众点评<br>可用性评估测试</h1>
+    <p class="desc">聚焦"游玩规划"全流程场景，用眼动仪、问卷与访谈的三角验证方法，
+      客观还原用户真实操作，量化并定位界面可用性问题。</p>
+    <div class="facts">
+      <div class="f"><b>7</b><span>名被试</span></div>
+      <div class="f"><b>5</b><span>核心任务</span></div>
+      <div class="f"><b>35</b><span>非重叠轨迹图</span></div>
+      <div class="f"><b>18</b><span>可用性问题</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 概述 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="grid-2" style="align-items:stretch;gap:48px">
+      <div style="display:flex;flex-direction:column;justify-content:center">
+        <div class="sec-head" style="margin-bottom:18px">
+          <span class="num reveal">01 — Overview</span>
+          <h2 class="reveal d1">从用户负面反馈<br>到可验证的设计问题</h2>
+        </div>
+        <p class="lead reveal d2" style="margin-bottom:14px">大众点评在频繁改版中出现信息层级复杂、功能入口不清、
+          信息密度高、语义不明确等体验痛点。本研究围绕<b>有效性、高效性、主观满意度</b>三大可用性指标，
+          评估用户在筛选、分享、查询、导航、评价与隐私设置等环节的操作表现。</p>
+        <p class="lead reveal d3">测试于 5 月 24 日至 6 月 14 日完成，历经准备、预测试、正式测试与数据分析四个阶段。</p>
+      </div>
+      <div class="card reveal d2" style="display:flex;flex-direction:column;justify-content:center">
+        <div class="mini-label">My Role · 我的角色</div>
+        <ul class="rolelist">
+          <li><svg><use href="#i-search"/></svg><span>一手 / 二手调研，多维用户画像分析，制作问卷筛选被试</span></li>
+          <li><svg><use href="#i-sitemap"/></svg><span>绘制软件架构图分析功能组，制定测试场景与目标</span></li>
+          <li><svg><use href="#i-clip"/></svg><span>设计前后评估问卷，执行访谈与眼动仪测试</span></li>
+          <li><svg><use href="#i-chart"/></svg><span>热力图 / 轨迹图分析对比，总结问题并输出改进方案</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="statgrid reveal" style="margin-top:34px;grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b data-count="64.4" data-dec="1" data-suf="%">0</b><span>总任务成功率</span></div>
+      <div class="stat"><b data-count="4.82" data-dec="2">0</b><span>整体体验评分 / 7</span></div>
+      <div class="stat"><b data-count="18">0</b><span>定位可用性问题</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 前期调研 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">02 — Desk Research</span>
+      <h2>前期调研与用户分析</h2>
+      <p>在测试之前，先从市场背景、竞品定位与用户画像三个层面理解"为谁设计、要解决什么问题"。</p>
+    </div>
+
+    <!-- 市场背景 -->
+    <div class="reveal">
+      <div class="mini-label">市场背景 · 2025.09</div>
+      <div class="statgrid" style="grid-template-columns:repeat(4,1fr)">
+        <div class="stat"><b data-count="12.69" data-dec="2">0</b><span>移动互联网月活 / 亿</span></div>
+        <div class="stat"><b data-count="9.16" data-dec="2">0</b><span>本地生活类月活 / 亿</span></div>
+        <div class="stat"><b data-count="1.58" data-dec="2">0</b><span>大众点评月活 / 亿</span></div>
+        <div class="stat"><b data-count="28" data-suf="%">0</b><span>用户数同比增长</span></div>
+      </div>
+      <p class="lead reveal" style="margin-top:16px;max-width:900px">本地生活服务已成为最高频、最刚需的场景之一。
+        大众点评覆盖商户类型超 400 种、服务超 1000 个城市，位居本地生活类 APP 月活 TOP3（美团 · 大众点评 · 建行生活）。</p>
+    </div>
+
+    <!-- 竞品分析 -->
+    <div class="reveal" style="margin-top:52px">
+      <div class="mini-label">竞品定位 · Positioning</div>
+      <p class="lead" style="margin-bottom:6px;max-width:900px">从产品定位、目标用户与主要功能三个维度对比大众点评与美团、淘宝闪购，明确"本地生活消费决策"这一差异化站位与本研究的评估重点。</p>
+      <div class="figure wide reveal"><img src="assets-5/media_014.png" alt="大众点评 · 美团 · 淘宝闪购 竞品定位对比">
+        <div class="cap">竞品定位对比 · 从产品定位、目标用户与主要功能三维对照大众点评、美团与淘宝闪购（点击查看大图）</div></div>
+    </div>
+
+    <!-- 用户反馈 + 画像 -->
+    <div class="grid-2 reveal" style="margin-top:52px;gap:40px;align-items:start">
+      <div class="card">
+        <div class="mini-label">用户反馈研究 · 小红书 77 帖</div>
+        <div class="bars" style="margin-top:6px">
+          <div class="bar" style="--w:100%"><div class="top"><b>信息层级混乱</b></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:88%"><div class="top"><b>核心功能入口弱化</b></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:76%"><div class="top"><b>首页营销挤占实用模块</b></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:64%"><div class="top"><b>个人中心界面杂乱</b></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d0b9a2,#b39a80)"></div></div></div>
+          <div class="bar" style="--w:56%"><div class="top"><b>视觉语言缺乏统一</b></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d0b9a2,#b39a80)"></div></div></div>
+        </div>
+        <p style="font-size:13.5px;color:var(--muted);margin-top:16px">聚焦"游玩规划"场景：行前路线规划 → 线下到店 → 就餐评价 → 周边游 → 社交建联</p>
+      </div>
+      <div class="card">
+        <div class="mini-label">目标用户画像 · User Profile</div>
+        <p style="font-size:14px;color:var(--ink2);margin-bottom:16px">以 20–39 岁学生与白领为主，接受新事物能力强、注重生活品质，集中于一线及新一线城市。</p>
+        <div style="font-size:13.5px;color:var(--ink2);margin-bottom:8px">男女比例 ≈ 4 : 3</div>
+        <div class="ratiobar"><span style="width:57%;background:linear-gradient(90deg,#d98a5c,#c47a43)"></span><span style="width:43%;background:#d9cbb8"></span></div>
+        <div class="legend"><span><i style="background:#d98a5c"></i>男性 4</span><span><i style="background:#d9cbb8"></i>女性 3</span></div>
+        <div class="chips" style="margin-top:18px">
+          <span class="chip">北京</span><span class="chip">上海</span><span class="chip">成都</span><span class="chip">杭州</span><span class="chip">南京</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap">
+          <svg style="width:20px;height:20px;color:var(--pc);fill:none;stroke:currentColor;stroke-width:1.7"><use href="#i-users"/></svg>
+          <span style="font-size:14px;color:var(--ink2)">被试招募 潜在 : 初级 : 高级 = <b style="color:var(--pc)">1 : 3 : 3</b></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:52px">
+      <div class="mini-label">数据洞察 · 百度指数</div>
+      <div class="figure wide"><img src="assets-7/media_073.png" alt="用户地域分布">
+        <div class="cap">地域分布 · 用户集中于北京、上海、成都、杭州、南京等一线及新一线城市</div></div>
+      <div class="cols-3" style="margin-top:24px">
+        <div class="figure eqh" style="--eh:230px"><img src="assets-7/media_074.png" alt="年龄分布">
+          <div class="cap">年龄分布 · 20–39 岁学生与白领为主力（TGI 显著偏高）</div></div>
+        <div class="figure eqh" style="--eh:230px"><img src="assets-7/media_075.png" alt="性别比例">
+          <div class="cap">性别比例 · 男性略多，男女约 4 : 3</div></div>
+        <div class="figure eqh" style="--eh:230px"><img src="assets-7/media_076.png" alt="使用频次">
+          <div class="cap">使用频次 · 周均 3 次及以上占 48.5%，高频刚需</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 研究方法 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">03 — Method</span>
+      <h2>三角验证的研究方法</h2>
+      <p>定量与定性结合，用三种互补方法交叉印证，让数据从"现象描述"走向"问题诊断"。</p>
+    </div>
+    <div class="cols-3">
+      <div class="card reveal"><div class="ic"><svg><use href="#i-eye"/></svg></div><h4>眼动仪测试</h4>
+        <p>记录注视点、注视时间与眼跳轨迹，提取关键界面的眼动热力图与非重叠轨迹图，还原视觉注意与操作路径。</p></div>
+      <div class="card reveal d1"><div class="ic"><svg><use href="#i-doc"/></svg></div><h4>问卷量表</h4>
+        <p>基于 PSSUQ 量表评估系统 / 信息 / 界面质量，基于 ASQ 量表评估单任务满意度，量化主观体验。</p></div>
+      <div class="card reveal d2"><div class="ic"><svg><use href="#i-chat"/></svg></div><h4>深度访谈</h4>
+        <p>一对一开放式讨论，探讨操作背后的原因与心理模型，弥补量化数据难以解释的行为动机。</p></div>
+    </div>
+    <div class="card reveal" style="margin-top:24px">
+      <div class="mini-label">交叉验证 · Cross-validation</div>
+      <p style="font-size:15px;color:var(--ink2)">
+        <b>非重叠轨迹图 × 热力图</b>——从"操作路径时序"与"视觉注意密度"双维对照，深层归因；
+        <b>启发式评估 × 可用性测试</b>——让专家走查的"设计规范缺陷"与用户测试的"真实行为绩效"相互印证。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 测试设计 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">04 — Test Design</span>
+      <h2>被试构成与任务场景</h2>
+      <p>依据平台典型用户特征，招募 7 名北京地区 20–39 岁被试，设计 5 项核心任务串联游玩规划全流程。</p>
+    </div>
+    <div class="figure wide reveal" style="margin-bottom:34px"><img src="assets-7/media_077.png" alt="软件功能架构图">
+      <div class="cap">软件功能架构梳理 · 拆解首页 / 搜索 / 功能金刚栏等功能组，据此定位测试路径与任务（★为筛选相关入口，点击查看大图）</div></div>
+    <div class="flow reveal">
+      <div class="node"><div class="n">任务一</div><h5>美食排行筛选</h5><p>筛选目的地并收藏至专辑</p></div>
+      <div class="arw">→</div>
+      <div class="node"><div class="n">任务二</div><h5>关注与分享</h5><p>按昵称关注·分享专辑留言</p></div>
+      <div class="arw">→</div>
+      <div class="node"><div class="n">任务三</div><h5>查找菜品价格</h5><p>找到菜品价格并分享好友</p></div>
+      <div class="arw">→</div>
+      <div class="node"><div class="n">任务四</div><h5>附近导航</h5><p>找咖啡店并开启步行导航</p></div>
+      <div class="arw">→</div>
+      <div class="node"><div class="n">任务五</div><h5>评价与隐私</h5><p>改匿名评价·设私信权限</p></div>
+    </div>
+    <div class="cols-2 reveal" style="margin-top:26px">
+      <div class="figure"><img src="assets-7/media_078.jpg" alt="正式测试现场">
+        <div class="cap">正式测试现场 · 签署保密协议、眼动仪校准与任务执行</div></div>
+      <div class="figure"><img src="assets-6/media_029.png" alt="非重叠轨迹图" class="crop-b">
+        <div class="cap">非重叠轨迹图 · 标准路径与被试实际路径的偏差、停留时长</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 关键发现 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">05 — Findings</span>
+      <h2>绩效数据说明了什么</h2>
+      <p>有效性看成功率，高效性看"被测用时 / 熟练用时"倍数——数值越高，效率越低、探索成本越大。</p>
+    </div>
+    <div class="grid-2" style="gap:48px;align-items:start">
+      <div class="reveal">
+        <h4 class="subh" style="font-size:17px;font-family:var(--sans);margin-bottom:20px">任务成功率 · 有效性</h4>
+        <div class="bars">
+          <div class="bar" style="--w:29%"><div class="top"><b>任务一 · 美食排行筛选</b><span>29% 最差</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:57%"><div class="top"><b>任务五 · 评价与隐私</b><span>57%</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:64%"><div class="top"><b>任务四 · 附近导航</b><span>64%</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:64.4%"><div class="top"><b>整体平均</b><span>64.4%</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#c9b7a0,#a8917a)"></div></div></div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <h4 class="subh" style="font-size:17px;font-family:var(--sans);margin-bottom:20px">操作效率 · 被测 / 熟练用时倍数</h4>
+        <div class="bars">
+          <div class="bar" style="--w:100%"><div class="top"><b>任务一</b><span>5.90×</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:84%"><div class="top"><b>任务五</b><span>4.96×</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:69%"><div class="top"><b>任务四</b><span>4.09×</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:52%"><div class="top"><b>任务二</b><span>3.09×</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d0b9a2,#b39a80)"></div></div></div>
+          <div class="bar" style="--w:49%"><div class="top"><b>任务三</b><span>2.91×</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d0b9a2,#b39a80)"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="lead reveal" style="margin-top:32px;max-width:900px">任务一"美食排行筛选"在成功率与效率上双双垫底——
+      入口层级深、定位操作复杂、筛选条件过多，是本次评估最典型的痛点。</p>
+  </div>
+</section>
+
+<!-- 06 眼动分析 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">06 — Eye-tracking</span>
+      <h2>热力图揭示的视觉盲区</h2>
+      <p>用户视线集中于大面积图文、高亮按钮与主视觉，却对核心功能的局部入口关注度不足。</p>
+    </div>
+    <div class="cols-3 reveal">
+      <div class="figure g-phone"><img src="assets-6/media_030.png" alt="首页热力图">
+        <div class="cap">首页 · "点评榜单"入口视觉像广告，无人点击进入</div></div>
+      <div class="figure g-phone"><img src="assets-6/media_031.png" alt="排行榜热力图">
+        <div class="cap">美食排行榜 · 切换定位字号小、颜色浅，可点击性弱</div></div>
+      <div class="figure g-phone"><img src="assets-6/media_032.png" alt="店铺主页热力图">
+        <div class="cap">店铺主页 · "搜索附近"藏于右上角三点入口，成视觉盲区</div></div>
+    </div>
+    <div class="cols-2 reveal d1" style="margin-top:24px">
+      <div class="figure g-phone"><img src="assets-6/media_033.png" alt="首页入口问题">
+        <div class="cap">标注 · 首页美食入口层级深、信息过载</div></div>
+      <div class="figure g-phone"><img src="assets-6/media_034.png" alt="美食页入口问题">
+        <div class="cap">标注 · 双重定位入口，真正的区域切换难以发现</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 问题汇总 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">07 — Summary</span>
+      <h2>18 项可用性问题的结构</h2>
+      <p>按问题类型与严重程度双维归类，为设计优化排定优先级。</p>
+    </div>
+    <div class="grid-2" style="gap:48px;align-items:start">
+      <div class="reveal">
+        <h4 class="subh" style="font-size:17px;font-family:var(--sans);margin-bottom:20px">问题类型分布</h4>
+        <div class="bars">
+          <div class="bar" style="--w:100%"><div class="top"><b>视觉问题</b><span>5 项</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:80%"><div class="top"><b>信息架构问题</b><span>4 项</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:80%"><div class="top"><b>交互问题</b><span>4 项</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:80%"><div class="top"><b>语义问题</b><span>4 项</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+          <div class="bar" style="--w:40%"><div class="top"><b>综合问题</b><span>2 项</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d98a5c,#b96f43)"></div></div></div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <h4 class="subh" style="font-size:17px;font-family:var(--sans);margin-bottom:20px">严重程度分级</h4>
+        <div class="statgrid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="stat"><b>0</b><span>灾难</span></div>
+          <div class="stat"><b>5</b><span>高</span></div>
+          <div class="stat"><b>12</b><span>中</span></div>
+          <div class="stat"><b>1</b><span>低</span></div>
+        </div>
+        <h4 class="subh" style="font-size:17px;font-family:var(--sans);margin:28px 0 18px">PSSUQ 测试后评分 / 7</h4>
+        <div class="bars">
+          <div class="bar" style="--w:69.4%"><div class="top"><b>系统可用性</b><span>4.86</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d0b9a2,#b39a80)"></div></div></div>
+          <div class="bar" style="--w:64.4%"><div class="top"><b>信息与反馈质量</b><span>4.51</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d0b9a2,#b39a80)"></div></div></div>
+          <div class="bar" style="--w:72.9%"><div class="top"><b>界面交互体验</b><span>5.10</span></div><div class="track"><div class="fill" style="background:linear-gradient(90deg,#d0b9a2,#b39a80)"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:40px">
+      <p class="pull">核心问题指向同一根源——<span class="hl">功能入口的可发现性</span>：
+        强关联功能被折叠隐藏、视觉缺乏"可点击"暗示、文案与图标未匹配用户心智。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 反思 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">08 — Reflection</span><h2>我的收获</h2></div>
+    <div class="cols-3">
+      <div class="card reveal"><div class="ic"><svg><use href="#i-layers"/></svg></div><h4>让数据可对话</h4><p>单一维度存在解读局限，唯有把轨迹、热力、访谈交叉印证，才能从"看到什么"推进到"为什么"。</p></div>
+      <div class="card reveal d1"><div class="ic"><svg><use href="#i-target"/></svg></div><h4>为发现分优先级</h4><p>18 项问题不是并列清单，用严重度 × 类型双维排序，才能把有限资源投给真正阻碍任务的缺陷。</p></div>
+      <div class="card reveal d2"><div class="ic"><svg><use href="#i-bulb"/></svg></div><h4>研究服务于设计</h4><p>每一条结论都对应一条可执行的改进建议——研究的终点是更好的界面，而非报告本身。</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="pnext"><div class="wrap"><h3>下一个项目</h3><p>从产品研究转向 AI 智能体驱动的传统文化体验平台。</p><div class="row"><a href="javascript:void 0" onclick="showPage('shanhai');return false" class="btn" style="background:linear-gradient(135deg,#6b8f82,#29453d)">下一个项目 · 崇山·瀚海 <span class="arw">→</span></a><a href="javascript:void 0" onclick="showPage('index');return false" class="btn ghost">返回首页</a></div></div></div>
+
+</div><div class="pageview" id="pv-yiyou">
+
+
+<!-- SVG 图标库 -->
+<svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 3L3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></symbol>
+ <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5 5 0 0112 5a5 5 0 019.5 7c-2.5 4.5-9.5 9-9.5 9z"/></symbol>
+ <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol>
+ <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18 2 2 0 001.8-2.9 1.9 1.9 0 011.7-2.9H18a3 3 0 003-3A9 9 0 0012 3z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></symbol>
+ <symbol id="i-hand" viewBox="0 0 24 24"><path d="M7 11V6a1.5 1.5 0 013 0v4M10 10V4.5a1.5 1.5 0 013 0V10M13 10V6a1.5 1.5 0 013 0v6M16 9.5a1.5 1.5 0 013 0V14a6 6 0 01-6 6h-1a6 6 0 01-5.2-3l-2.3-4a1.5 1.5 0 012.6-1.5L7 11"/></symbol>
+ <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/><path d="M19 15l.6 1.8 1.8.6-1.8.6-.6 1.8-.6-1.8-1.8-.6 1.8-.6.6-1.8z"/></symbol>
+ <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+</svg>
+
+<!-- SVG 图标库 -->
+<svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 000 18c1.4 0 2-.9 2-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.7-1.6 1.6-1.6H18a3 3 0 003-3c0-4.4-4-7.2-9-7.2z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></symbol>
+ <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 12V5.5a1.5 1.5 0 013 0V11m0-1V4.5a1.5 1.5 0 013 0V11m0-.5V6a1.5 1.5 0 013 0v6.5a7 7 0 01-7 7 6 6 0 01-5-2.7L6 13a1.6 1.6 0 012.6-1.8z"/></symbol>
+ <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8C12 8 10.5 3.5 8 4.2S9.5 8 12 8zM12 8s1.5-4.5 4-3.8S14.5 8 12 8z"/></symbol>
+ <symbol id="i-cube" viewBox="0 0 24 24"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v9"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-5.7 7-11a7 7 0 00-14 0c0 5.3 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+ <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></symbol>
+ <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5C10.5 4 7.5 3.5 4 4v14c3.5-.5 6.5 0 8 1 1.5-1 4.5-1.5 8-1V4c-3.5-.5-6.5 0-8 1zM12 5v14"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-9.2-8.4C1.2 8.7 2.6 5.5 5.8 5.2 8 5 9.5 6.3 12 9c2.5-2.7 4-3.8 6.2-3.6 3.2.3 4.6 3.5 3 6.2C19 15.7 12 20 12 20z"/></symbol>
+ <symbol id="i-link" viewBox="0 0 24 24"><path d="M9 15l6-6M10 6l1-1a4 4 0 015.7 5.7l-1 1M14 18l-1 1a4 4 0 01-5.7-5.7l1-1"/></symbol>
+</svg>
+
+<nav class="nav light">
+  <div class="logo"><a href="javascript:void 0" onclick="showPage('index');return false">← </a></div>
+  <div class="links"><a href="javascript:void 0" onclick="showPage('index','projects');return false">全部项目</a><a href="javascript:void 0" onclick="showPage('dianping');return false">大众点评</a><a href="javascript:void 0" onclick="showPage('ziban');return false">兹伴</a></div>
+</nav>
+
+<header class="p-hero">
+  <div class="cover"><img src="assets-5/media_012.png" alt="燕京八绝博物馆"></div>
+  <div class="wrap">
+    <a href="javascript:void 0" onclick="showPage('index');return false" class="back">← 返回首页</a>
+    <div class="kind">Cultural AR · 非遗文化 AR</div>
+    <h1>艺游八绝<br>燕京八绝 AR 导览</h1>
+    <p class="desc">与北京燕京八绝博物馆合作，以 AR 导览助力非遗活化。突破"展柜 + 说明牌"的静态局限，
+      让金漆镶嵌、景泰蓝、玉雕等八大绝技"可看、可学、可玩、可触"。</p>
+    <div class="facts">
+      <div class="f"><b>8</b><span>绝 · 非遗技艺</span></div>
+      <div class="f"><b>5</b><span>维设计思路</span></div>
+      <div class="f"><b>AR</b><span>集卡 + 手势交互</span></div>
+      <div class="f"><b>AIGC</b><span>技艺流程创作</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- 概述 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="grid-2" style="align-items:start;gap:56px">
+      <div>
+        <div class="sec-head" style="margin-bottom:20px"><span class="num reveal">01 — Overview</span>
+          <h2 class="reveal d1">让传统技艺<br>被年轻人主动探索</h2></div>
+        <p class="lead reveal d2" style="margin-bottom:16px">传统博物馆多为被动浏览，燕京八绝技艺流程复杂，仅凭文字图片难以形成直观认知，
+          对年轻群体吸引力不足。本项目以"<b>交互式文化传播</b>"为核心理念，
+          打造集文化传承、互动体验、教育科普于一体的移动 AR 应用。</p>
+        <p class="lead reveal d3">通过数字化手段打破物理限制，把复杂工艺变得直观易懂，
+          构建线上线下联动、可持续的博物馆文化生态。</p>
+      </div>
+      <div class="card reveal d2" style="display:flex;flex-direction:column;justify-content:center">
+        <div class="mini-label">My Role · 我的角色</div>
+        <ul class="rolelist">
+          <li><svg><use href="#i-palette"/></svg><span>整体 UI 界面设计与开发、功能模块界面设计</span></li>
+          <li><svg><use href="#i-hand"/></svg><span>手势交互功能开发（TouchDesigner + Unity）</span></li>
+          <li><svg><use href="#i-sparkle"/></svg><span>IP 形象"阿燕"设计与文创冰箱贴 AR 视觉设计</span></li>
+          <li><svg><use href="#i-cube"/></svg><span>AI 建模优化文物模型，AIGC 完成技艺流程创作</span></li>
+          <li><svg><use href="#i-pin"/></svg><span>参与博物馆实地测试</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 五维设计思路 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">02 — Design Thinking</span>
+      <h2>五维设计思路</h2>
+      <p>从场景、内容、情感、功能、视觉五个维度展开，构建完整的数字体验链路。</p></div>
+    <div class="cols-3">
+      <div class="card reveal"><div class="ic"><svg><use href="#i-map"/></svg></div><div class="step">场景</div><h4>游戏化重构动线</h4>
+        <p>将线下参观通过"地图集卡"机制，重新设计为有明确目标的探索任务，解决路径不直观、动机不强。</p></div>
+      <div class="card reveal d1"><div class="ic"><svg><use href="#i-book"/></svg></div><div class="step">内容</div><h4>可看可学可交互</h4>
+        <p>高精度文物建模自动旋转、AIGC 技艺流程短视频分步呈现、点云手势交互，三类内容增强。</p></div>
+      <div class="card reveal d2"><div class="ic"><svg><use href="#i-heart"/></svg></div><div class="step">情感</div><h4>IP 情感化叙事</h4>
+        <p>塑造 IP 匠人形象"阿燕"作为文化讲解助手，承担情绪锚点与信息导览，增强亲和力与叙事感。</p></div>
+      <div class="card reveal"><div class="ic"><svg><use href="#i-link"/></svg></div><div class="step">功能</div><h4>线上线下双核心</h4>
+        <p>线下扫描展品解锁打卡，线上扫描文创冰箱贴触发主题 AR 画面，延长博物馆体验生命周期。</p></div>
+      <div class="card reveal d1"><div class="ic"><svg><use href="#i-palette"/></svg></div><div class="step">视觉</div><h4>古韵新风美学</h4>
+        <p>以暖棕为主的历史感色调，建立系统性视觉语言，营造沉稳、雅致的文化沉浸感。</p>
+        <div style="display:flex;gap:8px;margin-top:14px">
+          <span style="width:34px;height:34px;border-radius:8px;background:#eadbbd;border:1px solid var(--line)"></span>
+          <span style="width:34px;height:34px;border-radius:8px;background:#683a24"></span>
+          <span style="width:34px;height:34px;border-radius:8px;background:#f8efde;border:1px solid var(--line)"></span>
+        </div></div>
+      <div class="card reveal d2" style="display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,#9c6a41,#683a24);color:#f8efde;border:none">
+        <div class="step" style="color:#eadbbd">核心逻辑</div>
+        <p style="color:#f5ecdd;font-size:14.5px">真实参观路径 → AR 识别 → 文物互动 → 技艺学习 → 集卡成就 → 个人化回忆</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 核心功能 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">03 — Features</span>
+      <h2>核心功能体验</h2>
+      <p>AR 集卡打卡为线下核心，IP 引导贯穿技艺详情全流程，AIGC 与手势交互解构文物。</p></div>
+
+    <div class="figure wide reveal" style="margin-bottom:40px"><img src="assets-4/media_007.jpg" alt="燕京八绝博物馆实景">
+      <div class="cap">燕京八绝博物馆实景 · 于古建院落间，让非遗技艺在数字导览中焕新</div></div>
+
+    <div class="grid-2 reveal" style="gap:44px;align-items:center;margin-bottom:44px">
+      <div class="figure g-phone"><img src="assets-5/media_015.png" alt="AR 打卡"></div>
+      <div>
+        <div class="step" style="font-family:var(--serif);color:var(--pc);font-size:15px;margin-bottom:10px">AR 集卡 · 打卡地图</div>
+        <h3 style="font-family:var(--serif);font-size:26px;margin-bottom:12px">化身文化寻宝者</h3>
+        <p class="lead">以一张水彩画风的博物馆俯览地图为起点，标注八件代表性文物的散落位置。
+          用户手持 App 走遍展区扫描实体文物，识别后出现可旋转缩放的<b>点云模型</b>，
+          文物收录进打卡画册，推动集卡进度、解锁成就。</p>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal" style="gap:44px;align-items:center;margin-bottom:44px">
+      <div style="order:2">
+        <div class="step" style="font-family:var(--serif);color:var(--pc);font-size:15px;margin-bottom:10px">IP 形象 · 阿燕</div>
+        <h3 style="font-family:var(--serif);font-size:26px;margin-bottom:12px">身着八绝元素的导览少女</h3>
+        <p class="lead">作为 AR 导览员，阿燕在用户扫描文物时出现，用专属动作与台词介绍每件工艺特色，
+          以亲切活泼的方式带领观众探索八绝技艺。"IP + 文物内容 + 用户操作"三重构成，形成更具记忆点的体验节奏。</p>
+      </div>
+      <div class="figure g-phone" style="order:1"><img src="assets-7/media_079.png" alt="IP 阿燕"></div>
+    </div>
+
+    <div class="cols-2 reveal">
+      <div class="figure g-phone"><img src="assets-7/media_080.jpg" alt="AR 实景体验">
+        <div class="cap">AR 实景体验 · 手机识别文物，青绿山水与白鹤悬浮于展台之上</div></div>
+      <div class="figure g-phone"><img src="assets-6/media_035.jpg" alt="花丝镶嵌葫芦">
+        <div class="cap">文物鉴赏 · 花丝镶嵌葫芦实拍，博物馆级细节呈现</div></div>
+    </div>
+    <div class="cols-2 reveal" style="margin-top:26px">
+      <div class="figure eqh" style="--eh:360px"><img src="assets-6/media_036.png" alt="AIGC 技艺详情">
+        <div class="cap">技艺详情 · AIGC 素描插画风格分步演示制作流程</div></div>
+      <div class="figure eqh" style="--eh:360px"><img src="assets-6/media_037.jpg" alt="文创立体海报">
+        <div class="cap">艺览文创 · 金花丝葫芦立体海报，扫描冰箱贴触发绽放呈现</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 页面设计 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">04 — Page Design</span>
+      <h2>页面设计与信息架构</h2>
+      <p>以底部三大 Tab「AR 集卡 · 文物鉴赏 · 个人中心」搭建信息架构，把扫描收集、文物鉴赏与个人成就分层归位；个人中心再收纳打卡画册与获得成就，让"收集—鉴赏—回味"的动线在一套导航里闭环。</p></div>
+
+    <div class="cols-4 reveal">
+      <div class="figure g-phone"><img src="assets-7/media_081.jpg" alt="文物鉴赏页">
+        <div class="cap">文物鉴赏 · 景泰蓝鸟杯 3D 点云自动旋转，底部滑动切换八绝文物</div></div>
+      <div class="figure g-phone"><img src="assets-7/media_082.jpg" alt="打卡画册页">
+        <div class="cap">打卡画册 · 流动动线串联金漆镶嵌、花丝镶嵌、景泰蓝等收藏，让文物"从展厅走进记忆"</div></div>
+      <div class="figure g-phone"><img src="assets-6/media_038.png" alt="获得成就页">
+        <div class="cap">获得成就 · 8 枚勋章体系与"前 6% 排名"，以游戏化成就激励持续探索</div></div>
+      <div class="figure g-phone"><img src="assets-7/media_083.png" alt="个人中心页">
+        <div class="cap">个人中心 · 汇总"我的足迹"，一屏进入打卡画册、获得成就与常见问题</div></div>
+    </div>
+
+    <div class="reveal" style="margin-top:40px">
+      <div class="mini-label">信息架构 · Information Architecture</div>
+      <div class="flow" style="margin-top:6px">
+        <div class="node"><div class="n">Tab 1</div><h5>AR 集卡</h5><p>地图寻宝 · 扫描打卡</p></div>
+        <div class="arw">·</div>
+        <div class="node"><div class="n">Tab 2</div><h5>文物鉴赏</h5><p>3D 点云 · 滑动切换</p></div>
+        <div class="arw">·</div>
+        <div class="node"><div class="n">Tab 3</div><h5>个人中心</h5><p>我的足迹 · 设置</p></div>
+        <div class="arw">→</div>
+        <div class="node"><div class="n">子级</div><h5>打卡画册</h5><p>收藏动线可视化</p></div>
+        <div class="arw">+</div>
+        <div class="node"><div class="n">子级</div><h5>获得成就</h5><p>勋章 · 排名激励</p></div>
+      </div>
+      <p class="lead" style="margin-top:20px">三大 Tab <b>各司其职</b>：AR 集卡负责"收"，文物鉴赏负责"赏"，个人中心负责"回味"；
+        个人中心再下沉打卡画册与获得成就两个子页，以统一暖棕视觉与勋章成就体系，形成"越集越想集"的正反馈闭环。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 执手问古 技术 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">05 — Interaction Tech</span>
+      <h2>执手问古 · 手势解构文物</h2>
+      <p>用手的左右移动控制文物旋转，手掌张合控制文物"炸开"与"重组"，把"不可触碰"变为"可参与"。</p></div>
+    <div class="grid-2" style="gap:44px;align-items:center">
+      <div class="figure dark reveal"><img src="assets-6/media_039.png" alt="TouchDesigner 手势">
+        <div class="cap">TouchDesigner 手势识别模块 · 手指捏合控制文物点云绽放</div></div>
+      <div class="reveal d1">
+        <div class="flow" style="flex-direction:column;gap:14px">
+          <div class="node" style="width:100%"><div class="n">采集</div><h5>手势识别模块</h5><p>TouchDesigner 实时捕捉手部动作</p></div>
+          <div class="arw" style="width:100%;justify-content:center;transform:none">↓</div>
+          <div class="node" style="width:100%"><div class="n">传输</div><h5>NDI Out 节点</h5><p>视频流式实时传输画面</p></div>
+          <div class="arw" style="width:100%;justify-content:center;transform:none">↓</div>
+          <div class="node" style="width:100%"><div class="n">呈现</div><h5>Unity 接收配置</h5><p>Raw Image 实时呈现于 Unity 场景</p></div>
+        </div>
+        <p class="lead" style="margin-top:20px">识别对象为 model target，识别结果为点云模型 + IP 动画 + 逐字出现的介绍文字；
+          脚本通过协程时序控制、插值动画与事件驱动，实现完整的 AR 触发动画序列系统。</p>
+      </div>
+    </div>
+    <div class="figure dark wide reveal d1" style="margin-top:36px"><img src="assets-7/media_084.jpg" alt="景泰蓝鸟杯点云绽放">
+      <div class="cap">景泰蓝鸟杯 · 点云重建后于黑金场景中绽放，手指捏合即可控制文物"炸开"与重组</div></div>
+  </div>
+</section>
+
+<!-- 演示视频 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">06 — Demo</span>
+      <h2>演示视频</h2>
+      <p>小组实地前往燕京八绝博物馆进行软件测试，录制完整使用方法与交互流程。</p></div>
+    <div class="videobox reveal" style="margin:0;background:#000">
+      <video src="assets-2/media_002.mp4" controls preload="metadata" playsinline
+        style="width:100%;aspect-ratio:16/9;object-fit:contain;background:#000;display:block"></video>
+    </div>
+  </div>
+</section>
+
+<div class="pnext"><div class="wrap"><h3>下一个项目</h3><p>从文化体验转向适老化与记忆支持。</p><div class="row"><a href="javascript:void 0" onclick="showPage('ziban');return false" class="btn" style="background:linear-gradient(135deg,#9c6a41,#683a24)">下一个项目 · 兹伴 <span class="arw">→</span></a><a href="javascript:void 0" onclick="showPage('index');return false" class="btn ghost">返回首页</a></div></div></div>
+
+</div><div class="pageview" id="pv-ziban">
+
+
+<!-- SVG 图标库 -->
+<svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+ <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 3L3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></symbol>
+ <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18 2 2 0 001.8-2.9 1.9 1.9 0 011.7-2.9H18a3 3 0 003-3A9 9 0 0012 3z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></symbol>
+ <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
+ <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/><path d="M19 15l.6 1.8 1.8.6-1.8.6-.6 1.8-.6-1.8-1.8-.6 1.8-.6.6-1.8z"/></symbol>
+ <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12l8.7-8.7a2 2 0 011.4-.6H20a1 1 0 011 1v6.9a2 2 0 01-.6 1.4L12 21a2 2 0 01-2.8 0L3 14.8a2 2 0 010-2.8z"/><circle cx="16" cy="8" r="1.3"/></symbol>
+ <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H8l-4 4V6a2 2 0 012-2h13a2 2 0 012 2z"/><path d="M8 9h8M8 12h5"/></symbol>
+</svg>
+<nav class="nav light">
+  <div class="logo"><a href="javascript:void 0" onclick="showPage('index');return false">← </a></div>
+  <div class="links"><a href="javascript:void 0" onclick="showPage('index','projects');return false">全部项目</a><a href="javascript:void 0" onclick="showPage('dianping');return false">大众点评</a><a href="javascript:void 0" onclick="showPage('yiyou');return false">艺游八绝</a></div>
+</nav>
+
+<header class="p-hero">
+  <div class="cover"><img src="assets-6/media_040.png" alt="兹伴 · 养老社区实地调研四人合照"></div>
+  <div class="wrap">
+    <a href="javascript:void 0" onclick="showPage('index');return false" class="back">← 返回首页</a>
+    <div class="kind">Ageing-friendly Product · 适老化产品设计</div>
+    <h1>兹伴<br>让回忆不孤单</h1>
+    <p class="desc">面向老年群体的认知训练与记忆追溯情感化交互设计。老年用户基于照片 / AI 生成照片，
+      完成故事创作、训练与互动，在温暖陪伴中强化认知与记忆。</p>
+    <div class="facts">
+      <div class="f"><b>5</b><span>阶段认知负荷分析</span></div>
+      <div class="f"><b>5</b><span>大功能模块</span></div>
+      <div class="f"><b>2</b><span>图像 / 语音智能体</span></div>
+      <div class="f"><b>PM</b><span>产品经理角色</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- 概述 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="grid-2" style="align-items:start;gap:56px">
+      <div>
+        <div class="sec-head" style="margin-bottom:20px"><span class="num reveal">01 — Overview</span>
+          <h2 class="reveal d1">以认知科学<br>驱动的适老设计</h2></div>
+        <p class="lead reveal d2" style="margin-bottom:16px">老年人面对记忆 App 常有"空白屏焦虑"、回忆提取困难、
+          描述吃力等障碍。兹伴形成"<b>上传记忆 — 记忆训练 — 记忆回溯</b>"的整体逻辑链，
+          辅以首页智能推荐、音乐疗法与 AD 评估。</p>
+        <p class="lead reveal d3">设计始终围绕降低认知负荷与情感陪伴，让每一次交互都简单、温暖、可控。</p>
+      </div>
+      <div class="card reveal d2" style="display:flex;flex-direction:column;justify-content:center">
+        <div class="mini-label">My Role · 产品经理</div>
+        <ul class="rolelist">
+          <li><svg><use href="#i-search"/></svg><span>前期一手调研、整体框架设计</span></li>
+          <li><svg><use href="#i-map"/></svg><span>用户旅程图、App 架构图制作</span></li>
+          <li><svg><use href="#i-palette"/></svg><span>UI/UX 页面设计与前端设计</span></li>
+          <li><svg><use href="#i-music"/></svg><span>音乐记忆训练小游戏制作</span></li>
+          <li><svg><use href="#i-sparkle"/></svg><span>交互动效组件制作与演示 Demo 剪辑</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 前期一手调研 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">02 — Field Research</span>
+      <h2>前期一手调研</h2>
+      <p>兹伴始于对老年群体的一手调研——走进养老社区做深度访谈、面向老人与其子女双向发放问卷、对回收文本做词云与需求聚类，让真实需求指导后续的认知负荷设计。</p></div>
+
+    <div class="reveal">
+      <div class="mini-label">实地走访 · 养老社区深度访谈</div>
+      <div class="cols-2">
+        <div class="figure eqh cov" style="--eh:300px"><img src="assets-6/media_027.png" alt="养老社区深度访谈">
+          <div class="cap">走进养老社区 · 与老人面对面深度访谈，记录记忆与情感诉求</div></div>
+        <div class="figure eqh cov" style="--eh:300px"><img src="assets-6/media_040.png" alt="调研小组实地合影">
+          <div class="cap">调研小组实地走访 · 覆盖"音乐奶奶""教授奶奶"等典型用户</div></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:52px">
+      <div class="mini-label">双向问卷 · 老人 + 子女</div>
+      <div class="figure wide"><img src="assets-5/media_016.png" alt="面向老年人的问卷调研">
+        <div class="cap">面向老年人的问卷框架 · 基本信息 / 生活方式与兴趣 / 健康意识与记忆状况 / 智能手机使用（点击查看大图）</div></div>
+      <div class="figure wide" style="margin-top:22px"><img src="assets-5/media_017.png" alt="面向老人子女的问卷调研">
+        <div class="cap">面向老人子女的问卷框架 · 基本信息 / 记忆问题与反应 / 电子产品与帮助方式（点击查看大图）</div></div>
+    </div>
+
+    <div class="reveal" style="margin-top:52px">
+      <div class="mini-label">需求梳理 · 访谈 → 需求点 → 解决方案</div>
+      <div class="figure wide"><img src="assets-5/media_018.png" alt="访谈内容—需求点—解决方案">
+        <div class="cap">将 8 类访谈观察逐层收敛为 8 大需求点，再映射到极简交互、情感陪伴、音乐疗愈等解决方案（点击查看大图）</div></div>
+    </div>
+
+    <div class="reveal" style="margin-top:52px">
+      <div class="mini-label">文本洞察 · 问卷高频词云</div>
+      <div class="cols-3">
+        <div class="figure eqh" style="--eh:210px"><img src="assets-5/media_019.jpg" alt="名词词云">
+          <div class="cap">名词高频 · 色彩 / 传统 / 音乐 / 视频 / 照片 / 风格</div></div>
+        <div class="figure eqh" style="--eh:210px"><img src="assets-5/media_020.jpg" alt="动词词云">
+          <div class="cap">动词高频 · 提醒 / 忘记 / 记不起 / 回忆 / 拍照 / 陪伴</div></div>
+        <div class="figure eqh" style="--eh:210px"><img src="assets-5/media_021.jpg" alt="总体词云">
+          <div class="cap">总体高频 · 柔和色彩、清新风格与记忆陪伴诉求交织</div></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:56px">
+      <div class="mini-label">定量分析 · 问卷需求洞察</div>
+      <div class="cols-2">
+        <div class="figure eqh" style="--eh:300px"><img src="assets-7/media_085.png" alt="记忆痛点分布条形图">
+          <div class="cap">记忆痛点分布 · 近七成受访者"记不起熟人名字"(69.52%)、六成"找不到常用物品"(63.81%)，短期记忆与命名障碍最突出</div></div>
+        <div class="figure eqh" style="--eh:300px"><img src="assets-7/media_086.png" alt="功能需求排序条形图">
+          <div class="cap">功能需求排序 · 亲友互动平台(80%)、生活场景认知辅助(65.71%)位居前列，社交连接与基础辅助需求强烈</div></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:40px">
+      <div class="mini-label">定位分析 · 散点图</div>
+      <div class="cols-2">
+        <div class="figure eqh" style="--eh:320px"><img src="assets-7/media_087.png" alt="竞品定位散点图">
+          <div class="cap">竞品定位散点图 · 以"功能聚焦 × 适老匹配"二维定位现有产品，多数偏单一功能，兹伴切入"综合服务 × 深度适老"的市场空位</div></div>
+        <div class="figure eqh" style="--eh:320px"><img src="assets-7/media_088.png" alt="KANO Better-Worse 散点图">
+          <div class="cap">KANO Better-Worse 散点图 · 备忘录、一键音乐、AI 聊天落入高吸引象限（右上），用药提醒、一键呼叫为必备属性，缺失即显著失分</div></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:40px">
+      <div class="mini-label">优先级分析 · KANO 构成 × RICE 排序</div>
+      <div class="cols-2">
+        <div class="figure eqh" style="--eh:300px"><img src="assets-7/media_089.png" alt="KANO 属性构成堆叠柱状图">
+          <div class="cap">KANO 属性构成 · 语音交互、记忆拼图以期望/魅力型为主，一键呼叫与用药提醒必备属性占比高，智能养生多为无差异型</div></div>
+        <div class="figure eqh" style="--eh:300px"><img src="assets-7/media_090.png" alt="RICE 模型优先级条形图">
+          <div class="cap">RICE 模型优先级 · 综合覆盖 / 影响 / 信心 / 成本打分，记忆拼图、音乐疗法、时光故事轴列前三，据此确立开发排期</div></div>
+      </div>
+    </div>
+
+    <div class="figure wide reveal" style="margin-top:40px"><img src="assets-6/media_041.png" alt="KANO 需求分析表">
+      <div class="cap">KANO 需求分析表 · 汇总各功能的 Better / Worse 系数、属性类型与最终优先级，输出对应的设计策略与优化方向（点击查看大图）</div></div>
+  </div>
+</section>
+
+<!-- 认知负荷分析 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">03 — Cognitive Load</span>
+      <h2>认知负荷分析与用户旅程</h2>
+      <p>拆解记忆任务全流程，逐阶段评估内在 / 外在 / 相关负荷——认知负荷在"记忆输入"阶段攀升，据此确定智能介入的时机。</p></div>
+    <div class="figure wide reveal"><img src="assets-5/media_022.png" alt="用户旅程图">
+      <div class="cap">完整用户旅程图 · 目标 / 行为 / 情绪体验 / 阶段 / 界面信息 / 认知负荷分析 六大泳道逐阶段拆解（点击查看大图）</div></div>
+  </div>
+</section>
+
+<!-- 智能组件 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">04 — Intelligent Intervention</span>
+      <h2>三大智能组件</h2>
+      <p>在恰当的认知负荷节点介入，减少老人自主输出与冗余操作，体现透明化设计。</p></div>
+    <div class="cols-3">
+      <div class="card reveal"><div class="ic"><svg><use href="#i-tag"/></svg></div><h4>智能筛选</h4>
+        <p>AI 结合用户数据生成小标签，用户可自由编辑或依标签筛选与更新内容，减少描述场景的记忆负荷。</p></div>
+      <div class="card reveal d1"><div class="ic"><svg><use href="#i-sparkle"/></svg></div><h4>智能推荐</h4>
+        <p>结合点击频次与个性化用户画像偏好，按序排布首页内容，缓解"打开 App 不知从何开始"。</p></div>
+      <div class="card reveal d2"><div class="ic"><svg><use href="#i-chat"/></svg></div><h4>AI 对话</h4>
+        <p>对保存内容实时更新、可随时切换查看，并由 AI 给出选项提示，减少思考与输入负荷。</p></div>
+    </div>
+    <div class="cmp-wrap reveal d1" style="margin-top:30px">
+      <table class="cmp cmp-matrix">
+        <thead><tr>
+          <th>任务阶段 / 模块</th>
+          <th>主要认知负荷点</th>
+          <th>自动化处理</th>
+          <th>对应智能介入功能</th>
+          <th>个性化自适应</th>
+          <th>减负效果</th>
+        </tr></thead>
+        <tbody>
+          <tr><th>触发回忆</th>
+            <td>打开 App 无从入手、决策困难、缺乏动力（中-高）</td>
+            <td>后台识别纪念日 / 节日，自动准备照片、歌曲、故事</td>
+            <td>常用功能智能排序、特殊主题日推荐卡片</td>
+            <td>依历史行为、日期、情绪动态推送最匹配卡片</td>
+            <td>快速建立情感连接，降低启动门槛，形成每日打开习惯</td></tr>
+          <tr><th>记忆输入</th>
+            <td>选材困难、手动整理繁琐、描述吃力（高）</td>
+            <td>上传后自动生成小标签 + 图生文 / 文生图、"猜你想传"筛选</td>
+            <td>自动标签精炼、多风格图文可选、智能相册筛选</td>
+            <td>依上传习惯填标签 + 风格偏好记忆</td>
+            <td>大幅降低操作与决策负担，快速形成初始记忆内容</td></tr>
+          <tr><th>AI 陪伴式对话</th>
+            <td>回忆细节困难、组织语言、担心说不清（高）</td>
+            <td>讲述时自动换新标签、实时更新故事内容</td>
+            <td>自动更新标签、对话内容即时同步</td>
+            <td>依讲述速度、停顿、情绪调整提问节奏与语气</td>
+            <td>将自由回忆转为结构化陪伴，显著减轻认知与情感压力</td></tr>
+          <tr><th>记忆拼图</th>
+            <td>拼图难度不当、缺乏沉浸叙事、回忆激活不足（中）</td>
+            <td>图片自动切割成适量拼图块</td>
+            <td>边缘智能高亮提示、故事内容预载、同步语音引导</td>
+            <td>拼图难度依历史表现与认知水平动态调整</td>
+            <td>升级为沉浸式怀旧疗法，降低挫败，提升完成成就感</td></tr>
+          <tr><th>时光故事轴</th>
+            <td>导航迷失、信息过载、不知看哪条、情感孤独（高）</td>
+            <td>AI 创意故事集自动编织 + 自动播报</td>
+            <td>时间 / 主题智能分类、AI 取词搜索、一键亲友分享</td>
+            <td>依季节 / 节日 / 情绪 / 认知趋势动态排序与推送</td>
+            <td>将冷时间线变为温暖陪伴空间，提升情感满足</td></tr>
+          <tr><th>音乐训练</th>
+            <td>选歌困难、内容不匹配、过程冷清、回忆激活低（中）</td>
+            <td>歌曲自动淡入淡出切换</td>
+            <td>个性化歌单智能推荐、关联记忆照片 / 故事显示</td>
+            <td>依故事标签、听歌历史、节奏调整</td>
+            <td>以决策负荷趋零，全程陪伴激活回忆</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 功能架构 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">05 — Architecture</span>
+      <h2>功能架构与核心模块</h2>
+      <p>形成"存储 — 回溯 — 互动"的记忆管理闭环。</p></div>
+    <div class="figure reveal"><img src="assets-6/media_042.png" alt="兹伴功能架构">
+      <div class="cap">完整功能架构 · 首页探索 / 记忆拼图 / 时光故事轴 / 记忆训练 / 个人中心</div></div>
+    <div class="cols-3 reveal d1" style="margin-top:26px">
+      <div class="card"><div class="step">首页 · 探索</div><p>整合功能导航与温馨记忆推荐，为用户提供直观高效的操作起点。</p></div>
+      <div class="card"><div class="step">记忆拼图</div><p>AI 将故事图片切割为拼图，操作时同步语音播报，兼具记忆强化与手部协调训练。</p></div>
+      <div class="card"><div class="step">时光故事轴</div><p>时间轴归档图文记忆，AI 标签快速检索，内置亲属评论实现家庭共享。</p></div>
+      <div class="card"><div class="step">音乐训练</div><p>音乐聆听 + 点击训练两类轻量模块，依托音乐疗法与 AI 语音引导实现认知干预。</p></div>
+      <div class="card"><div class="step">个人中心</div><p>认知自测量表、家族互联、一键同步子女端，形成常态化认知保护。</p></div>
+      <div class="card" style="background:linear-gradient(135deg,#e0995a,#c47a34);color:#fff;border:none">
+        <div class="step" style="color:#ffe8cf">设计闭环</div><p style="color:#fff5ec">上传记忆 → 记忆训练 → 记忆回溯，串联成完整而温暖的记忆旅程。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 高保真界面 -->
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">06 — Hi-Fi Design</span>
+      <h2>高保真界面与组件</h2>
+      <p>暖橙主色，米白背景，低饱和辅助色；统一全局与交互组件，充分照顾老年人的视觉与操作习惯。</p></div>
+    <div class="cols-4 reveal">
+      <div class="figure g-phone"><img src="assets-6/media_043.png" alt="首页探索">
+        <div class="cap">首页探索 · 温馨记忆推荐与常用功能</div></div>
+      <div class="figure g-phone"><img src="assets-6/media_044.png" alt="记忆拼图">
+        <div class="cap">记忆拼图 · 碎片与故事细节同步语音播报</div></div>
+      <div class="figure g-phone"><img src="assets-3/media_004.png" alt="时光故事轴">
+        <div class="cap">时光故事轴 · 图文归档，欢迎回到时光之旅</div></div>
+      <div class="figure g-phone"><img src="assets-6/media_045.png" alt="音乐训练">
+        <div class="cap">音乐训练 · 聆听 + 点击的轻量认知干预</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 智能体设计 -->
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">07 — Agent System</span>
+      <h2>图像与语音双智能体</h2>
+      <p>聚焦图像与语音两个智能系统进行技术尝试，验证项目拓展的可行性。</p></div>
+    <div class="grid-2" style="gap:44px;align-items:start">
+      <div class="reveal">
+        <div class="card" style="margin-bottom:20px">
+          <div class="step">图像智能体 · 生成聊天方向</div>
+          <div class="flow" style="flex-direction:column;gap:12px;margin-top:14px">
+            <div class="node" style="width:100%"><h5>上传图片</h5></div>
+            <div class="arw" style="width:100%;justify-content:center;transform:none">↓</div>
+            <div class="node" style="width:100%"><h5>YOLOv5 物体识别</h5><p>提取关键词标签</p></div>
+            <div class="arw" style="width:100%;justify-content:center;transform:none">↓</div>
+            <div class="node" style="width:100%"><h5>返回中文聊天提示</h5><p>标签 pill 可点击二次触发对话</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="card">
+          <div class="step">语音智能体 · 适老化实时对话</div>
+          <div class="flow" style="flex-direction:column;gap:12px;margin-top:14px">
+            <div class="node" style="width:100%"><h5>Deepgram STT</h5><p>语音识别 · Silero VAD 活动检测</p></div>
+            <div class="arw" style="width:100%;justify-content:center;transform:none">↓</div>
+            <div class="node" style="width:100%"><h5>RAG 增强</h5><p>HuggingFace BAAI/SeniorTalk 语料检索</p></div>
+            <div class="arw" style="width:100%;justify-content:center;transform:none">↓</div>
+            <div class="node" style="width:100%"><h5>OpenAI LLM</h5><p>适老化中文提示生成自然对话</p></div>
+            <div class="arw" style="width:100%;justify-content:center;transform:none">↓</div>
+            <div class="node" style="width:100%"><h5>Cartesia TTS</h5><p>WebRTC pipecat 实时流式播报</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:30px">
+      <div class="mini-label">语音链路 · Voice Pipeline</div>
+      <div class="flow" style="margin-top:6px">
+        <div class="node"><div class="n">输入</div><h5>麦克风</h5><p>WebRTC · pipecat-small-webrtc</p></div>
+        <div class="arw">→</div>
+        <div class="node"><div class="n">STT</div><h5>Deepgram</h5><p>语音识别 · Silero VAD 活动检测</p></div>
+        <div class="arw">→</div>
+        <div class="node"><div class="n">RAG</div><h5>检索增强</h5><p>BAAI/SeniorTalk 语料 · FAISS 检索</p></div>
+        <div class="arw">→</div>
+        <div class="node"><div class="n">LLM</div><h5>OpenAI</h5><p>适老化中文提示 · 生成自然回应</p></div>
+        <div class="arw">→</div>
+        <div class="node"><div class="n">TTS</div><h5>Cartesia</h5><p>文本转语音 · 实时流式合成</p></div>
+        <div class="arw">→</div>
+        <div class="node"><div class="n">输出</div><h5>扬声器</h5><p>实时流式播报</p></div>
+      </div>
+      <div class="cols-3" style="margin-top:22px">
+        <div class="card"><div class="step">架构与组件</div><p>SeniorTalkRAG 继承 FrameProcessor，在 context_aggregator.user() 与 LLM 之间插入；Pipeline：input → RTVI → STT → RAG → LLM → TTS → output。</p></div>
+        <div class="card"><div class="step">老年人数据利用</div><p>从 HuggingFace BAAI/SeniorTalk 流式取样约 2000 句，SentenceTransformer 构建文本向量索引，命中语料拼接进上下文，提升贴合度与稳定性。</p></div>
+        <div class="card"><div class="step">传输与时序</div><p>Silero VAD + Local Smart Turn V3 做语音活动检测与轮次分析，RTVI 处理客户端事件，实现低延迟的适老化实时对话。</p></div>
+      </div>
+      <div class="cap" style="color:var(--muted);font-size:13px;padding-top:13px;text-align:center">语音链路架构 · 麦克风 → STT（Deepgram）→ RAG 增强 → LLM（OpenAI）→ TTS（Cartesia）→ 扬声器，实时流式</div>
+    </div>
+    <div class="reveal" style="margin-top:36px">
+      <p class="pull">好的适老设计不是把界面做大，而是<span class="hl">把认知负荷做小</span>——
+        让技术隐于温暖的陪伴之后。</p>
+    </div>
+    <div class="reveal" style="margin-top:44px">
+      <div class="mini-label" style="text-align:center">Demo · 完整演示</div>
+      <div class="videobox" style="margin:14px 0 0;background:#000">
+        <video src="assets-3/media_005.mp4" controls preload="metadata" playsinline
+          style="width:100%;aspect-ratio:16/9;object-fit:contain;background:#000;display:block"></video>
+      </div>
+      <div class="cap" style="text-align:center;color:var(--muted);font-size:13px;padding-top:11px">兹伴 App 完整交互演示 · 上传记忆 → 记忆训练 → 记忆回溯</div>
+    </div>
+  </div>
+</section>
+
+<div class="pnext"><div class="wrap"><h3>下一个项目</h3><p>继续查看以用户研究和可用性诊断驱动的产品优化。</p><div class="row"><a href="javascript:void 0" onclick="showPage('dianping');return false" class="btn" style="background:linear-gradient(135deg,#d98a5c,#b96f43)">下一个项目 · 大众点评可用性研究 <span class="arw">→</span></a><a href="javascript:void 0" onclick="showPage('index');return false" class="btn ghost">返回首页</a></div></div></div>
+
+</div>
+<div class="pageview" id="pv-shanhai">
+<svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="sh-book" viewBox="0 0 24 24"><path d="M4 4h7a3 3 0 013 3v13a3 3 0 00-3-3H4z"/><path d="M20 4h-7a3 3 0 00-3 3v13a3 3 0 013-3h7z"/></symbol>
+  <symbol id="sh-brush" viewBox="0 0 24 24"><path d="M14 4l6 6-9 9-6 1 1-6z"/><path d="M13 5l2-2 6 6-2 2"/></symbol>
+  <symbol id="sh-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="sh-scroll" viewBox="0 0 24 24"><path d="M6 4h12v15H8a3 3 0 010-6h10"/><path d="M8 4a3 3 0 000 6h10"/></symbol>
+</svg>
+
+<header class="p-hero sh-hero">
+  <div class="cover"><img src="assets-5/media_013.png" alt="崇山·瀚海 · 基于山海经的互动探索平台"></div>
+  <div class="wrap">
+    <a class="back" href="javascript:void 0" onclick="showPage('index');return false">← 返回作品集</a>
+    <div class="kind">AI Agent × Interactive Culture · Web Experience Platform</div>
+    <h1>崇山·瀚海</h1>
+    <p class="desc">一个结合 AI 智能体的体验式网页平台，把视觉小说游戏、智能辅助绘画、交流社区与数字图鉴组织为一体，让用户在探索、创作与分享中体验传统《山海经》文化。</p>
+    <div class="facts">
+      <div class="f"><b>4</b><span>核心体验模块</span></div>
+      <div class="f"><b>Ren’Py</b><span>视觉小说引擎</span></div>
+      <div class="f"><b>ComfyUI</b><span>AI 绘画工作流</span></div>
+      <div class="f"><b>AI Agent</b><span>智能交互辅助</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="p-body">
+
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">01 — Context</span>
+      <h2>让古老文本从“被阅读”转向“可探索、可创作、可交流”</h2>
+      <p>项目从《山海经》的数字化传播困境出发，将 AIGC 与沉浸式互动体验结合，尝试建立传统文化的当代表达路径。</p>
+    </div>
+    <div class="sh-intro">
+      <div class="card reveal">
+        <div class="mini-label">设计背景 · Design Background</div>
+        <p style="font-size:15px;color:var(--ink2);line-height:1.88">《山海经》作为承载上古神话、地理与先民智慧的文化典籍，其蕴含的神秘意象与哲学思维堪称中华文明的基因密码。然而在数字化浪潮与快节奏生活方式的冲击下，传统典籍的线性传播模式渐显局限，年轻群体对古籍的认知隔阂日益显著。如何突破文化传承的时空壁垒，让古老文本从简牍走向数字终端，成为激活传统文化当代生命力的关键命题。</p>
+      </div>
+      <div class="sh-quote reveal d1">
+        <b>当 AIGC 技术与沉浸式体验需求结合，传统文化现代表达有了新可能。</b>
+        <p>透视年轻用户对互动性、创造性文化消费需求强烈，崇山·瀚海平台借助 Ren’Py 引擎、ComfyUI 工作流等技术，打造“视觉小说 + AI 创作 + 社区分享 + 数字图鉴”模块。通过科技让《山海经》世界变成可探索、创作、交流的数字化空间，既满足 Z 世代对传统文化的解构需求，也为古籍活化提供了有学术深度和传播效果的新方式。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">02 — Users & Journey</span>
+      <h2>从年轻用户的兴趣触点，梳理持续参与的体验路径</h2>
+      <p>用户分析聚焦对传统文化、视觉创作与新体验具有不同需求的人群，再将“内容引导—沉浸体验—创作参与—社区反馈—长期留存”串成完整体验。</p>
+    </div>
+    <div class="sh-data-grid">
+      <div class="figure reveal"><img src="assets-6/media_046.png" alt="崇山瀚海用户分析"><div class="cap">用户分析 · User Profiles</div></div>
+      <div class="figure reveal d1"><img src="assets-6/media_047.png" alt="崇山瀚海用户流程图"><div class="cap">用户流程图 · User Journey</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">03 — Information Architecture</span>
+      <h2>四个模块不是并列功能，而是一条文化体验闭环</h2>
+      <p>视觉小说负责“进入世界”，AI 绘画负责“参与创作”，社区负责“交流扩散”，数字图鉴负责“知识沉淀”，共同连接探索、创作、分享与学习。</p>
+    </div>
+    <div class="figure wide reveal sh-wide"><img src="assets-7/media_091.png" alt="崇山瀚海平台信息架构"><div class="cap">平台信息架构 · Platform Information Architecture</div></div>
+  </div>
+</section>
+
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">04 — Core Experience</span>
+      <h2>四种交互方式，共同打开《山海经》世界</h2>
+      <p>每个功能对应一种不同的文化接触方式：剧情体验、生成式创作、社区交流与知识收集。</p>
+    </div>
+    <div class="sh-module-grid">
+      <div class="card sh-module reveal">
+        <div class="figure"><img src="assets-6/media_048.png" alt="山海逸章"></div>
+        <div class="txt"><div class="k">VISUAL NOVEL</div><h4>山海逸章</h4><p>依托 Ren’Py 引擎构建的沉浸式视觉小说游戏，通过多支线剧情、音画 CG、角色收集，让用户在交互中深度探索《山海经》神话世界。</p></div>
+      </div>
+      <div class="card sh-module reveal d1">
+        <div class="figure"><img src="assets-6/media_049.png" alt="幻绘山海"></div>
+        <div class="txt"><div class="k">AI CREATION</div><h4>幻绘山海</h4><p>基于 ComfyUI 搭建的实时 AI 绘画模块，用户绘制简单线条即可生成《山海经》风格异兽图像，支持色彩与笔刷调整。</p></div>
+      </div>
+      <div class="card sh-module reveal d2">
+        <div class="figure"><img src="assets-6/media_050.png" alt="山海聚谈"></div>
+        <div class="txt"><div class="k">COMMUNITY</div><h4>山海聚谈</h4><p>供用户分享《山海经》相关游戏体验、绘画成果及二次创作的社区交流平台，支持点赞、评论等互动形式。</p></div>
+      </div>
+      <div class="card sh-module reveal d3">
+        <div class="figure"><img src="assets-6/media_051.png" alt="山海图鉴"></div>
+        <div class="txt"><div class="k">COLLECTION & KNOWLEDGE</div><h4>山海图鉴</h4><p>整合《山海经》神兽、地理等科普内容并用图鉴形式进行展示，用户可通过点击、滑动卷轴查看各类山海异兽与奇幻知识。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">05 — Interface</span>
+      <h2>从四个功能首页到内容内页，建立统一的山海视觉体验</h2>
+      <p>四个功能入口分别建立独立的视觉记忆点，同时保持统一的深色山水基底、传统纹样、圆形构图与低饱和色彩；进入功能内页后，剧情、创作、社区与图鉴继续沿用同一套界面语言。</p>
+    </div>
+    <div class="mini-label reveal" style="text-align:center;margin-bottom:8px">功能首页展示 · Feature Landing Pages</div>
+    <div class="sh-home-grid">
+      <div class="figure sh-transparent reveal"><img src="assets-5/media_023.png" alt="山海逸章功能首页"><div class="cap">山海逸章 · Wandering Realms</div></div>
+      <div class="figure sh-transparent reveal d1"><img src="assets-6/media_052.png" alt="幻绘山海功能首页"><div class="cap">幻绘山海 · Illusory Landscapes</div></div>
+      <div class="figure sh-transparent reveal d2"><img src="assets-5/media_024.png" alt="山海聚谈功能首页"><div class="cap">山海聚谈 · Dialogues Across Realms</div></div>
+      <div class="figure sh-transparent reveal d3"><img src="assets-6/media_053.png" alt="山海图鉴功能首页"><div class="cap">山海图鉴 · Pantheon of Wonder</div></div>
+    </div>
+    <div class="mini-label reveal" style="text-align:center;margin:6px 0 18px">功能内页展示 · Interface Details</div>
+    <div class="figure reveal sh-transparent sh-inner"><img src="assets-4/media_008.png" alt="崇山瀚海功能内页展示"><div class="cap">地图探索、剧情选择、AI 绘画、创作展示、知识问答、图鉴收集与社区交流等主要功能内页</div></div>
+  </div>
+</section>
+
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">06 — Visual System</span>
+      <h2>用低饱和山海色建立传统意象与数字界面的平衡</h2>
+      <p>设计规范统一色彩、组件与图形语言，在水墨山川的文化氛围中保留现代网页的清晰层级与操作识别。</p>
+    </div>
+    <div class="figure wide reveal sh-wide"><img src="assets-6/media_054.png" alt="崇山瀚海设计规范"><div class="cap">设计规范 · Design System</div></div>
+  </div>
+</section>
+
+<section class="p-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">07 — Technology</span>
+      <h2>让 AI 智能体、视觉小说与实时生成工作流各自承担合适的任务</h2>
+      <p>技术并非独立展示，而是服务于不同体验目标：剧情分支、生成式创作、智能辅助与网页端内容组织共同构成平台体验。</p>
+    </div>
+    <div class="figure wide reveal sh-wide"><img src="assets-3/media_006.png" alt="崇山瀚海技术路线"><div class="cap">技术路线 · Technical Pipeline</div></div>
+    <div class="sh-tech">
+      <div class="card reveal"><div class="n">01</div><h4>Ren’Py 视觉小说</h4><p>承载“山海逸章”的支线剧情、角色互动、CG 与收集机制，把文化内容转化为可推进的叙事体验。</p></div>
+      <div class="card reveal d1"><div class="n">02</div><h4>ComfyUI 实时绘画</h4><p>以工作流调度生成模型，将用户草绘与参数输入转化为山海异兽视觉结果，形成即时创作反馈。</p></div>
+      <div class="card reveal d2"><div class="n">03</div><h4>AI 智能体辅助</h4><p>在体验式网页平台中提供智能辅助能力，与文化内容、创作过程和交互模块协同，而不是将 AI 作为孤立功能。</p></div>
+      <div class="card reveal d3"><div class="n">04</div><h4>社区与图鉴沉淀</h4><p>把用户的体验、二次创作与知识浏览连接起来，让一次性的文化接触转化为可持续的分享和收集。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="p-sec alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">08 — Demo</span>
+      <h2>完整平台体验演示</h2>
+      <p>从功能入口到视觉小说、AI 创作、社区与图鉴，视频展示《崇山·瀚海》的主要交互流程与页面体验。</p>
+    </div>
+    <div class="sh-demo reveal">
+      <div class="videobox"><video src="assets-1/media_001.mp4" controls preload="metadata" playsinline style="width:100%;aspect-ratio:5/3;object-fit:contain;background:#0b0d0c"></video></div>
+      <div class="sh-demo-note">《崇山·瀚海》· 平台功能与交互演示</div>
+    </div>
+  </div>
+</section>
+
+<div class="pnext"><div class="wrap"><h3>下一个项目</h3><p>进一步查看 AIGC 如何进入完整游戏制作工作流。</p><div class="row"><a href="javascript:void 0" onclick="showPage('liaozhai');return false" class="btn" style="background:linear-gradient(135deg,#657b72,#40584f)">下一个项目 · 薛定谔的聊斋镇 <span class="arw">→</span></a><a href="javascript:void 0" onclick="showPage('index');return false" class="btn ghost">返回首页</a></div></div></div>
+</div>
+</div>
+<div class="pageview" id="pv-liaozhai">
+<svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="lz-spark" viewBox="0 0 24 24"><path d="M12 2l1.5 5.2L19 9l-5.5 1.8L12 16l-1.5-5.2L5 9l5.5-1.8L12 2z"/><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15z"/></symbol>
+ <symbol id="lz-card" viewBox="0 0 24 24"><rect x="4" y="3" width="14" height="18" rx="2"/><path d="M8 7h6M8 11h6M8 15h4"/><path d="M18 7h2v12a2 2 0 01-2 2"/></symbol>
+ <symbol id="lz-code" viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></symbol>
+ <symbol id="lz-music" viewBox="0 0 24 24"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></symbol>
+ <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H8l-4 4V6a2 2 0 012-2h13a2 2 0 012 2z"/><path d="M8 9h8M8 12h5"/></symbol>
+ <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></symbol>
+</svg>
+<div id="prog"></div>
+<nav class="nav light"><div class="logo"> <span style="opacity:.6;font-size:13px"></span></div><div class="links"><a href="javascript:void 0" onclick="showPage('index');return false">首页</a><a href="#lz-workflow">AIGC 工作流</a><a href="#lz-result">结果</a></div></nav>
+<header class="p-hero lz-hero">
+  <div class="cover"><img src="assets-6/media_028.webp" alt="薛定谔的聊斋镇 · 丰富玩法与国风视觉"></div>
+  <div class="wrap">
+    <a class="back" href="javascript:void 0" onclick="showPage('index');return false">← 返回作品集</a>
+    <div class="kind">AIGC-augmented Game Production · Unity / Steam</div>
+    <h1>薛定谔的聊斋镇</h1>
+    <p class="desc">一款自由探索、卡牌叙事与角色攻略结合的剧情游戏。项目重点不是“用 AI 生成素材”，而是把 AIGC 组织成一条可控、可迭代的完整游戏制作工作流。</p>
+    <div class="facts"><div class="f"><b>15</b><span>核心角色</span></div><div class="f"><b>3 Days</b><span>动态叙事周期</span></div><div class="f"><b>6+</b><span>AI 工具协同</span></div><div class="f"><b>Unity → Steam</b><span>完整落地</span></div></div>
+  </div>
+</header>
+<div class="p-body">
+<section class="p-sec"><div class="wrap">
+ <div class="sec-head reveal"><span class="num">01 — Project</span><h2>先定义“游戏体验”，再决定 AI 应该出现在哪里</h2><p>玩家意外穿越进“薛定谔的聊斋镇”，在三天内自由探索城镇与郊外，通过行动点触发角色事件、收集并使用道具卡、完成解谜小游戏、改变角色关系，最终决定逃回现实、留在镇中，或开启通往新世界的隐藏结局。</p></div>
+ <div class="cols-4">
+  <div class="card reveal"><div class="ic"><svg><use href="#lz-card"/></svg></div><h4>卡牌探索</h4><p>场景探索获得线索与道具卡，卡牌既是资源，也是推进人物剧情的触发器。</p></div>
+  <div class="card reveal d1"><div class="ic"><svg><use href="#i-chat"/></svg></div><h4>关系叙事</h4><p>人、妖、捉妖师等角色彼此纠葛，玩家的选择会改变好感、线索与后续事件。</p></div>
+  <div class="card reveal d2"><div class="ic"><svg><use href="#lz-spark"/></svg></div><h4>解谜小游戏</h4><p>断案、采药、诗词、烹饪等小游戏嵌入叙事，避免纯文本推进造成体验单一。</p></div>
+  <div class="card reveal d3"><div class="ic"><svg><use href="#i-layers"/></svg></div><h4>多重结局</h4><p>“离开 / 留下 / 新世界”等结局来自三日选择的累积，而不是单一终局按钮。</p></div>
+ </div>
+ <div class="lz-note reveal" style="margin-top:28px"><b>我的核心方法：Human-directed, AI-accelerated</b><p>世界观、玩法结构、角色关系、关键美术判断和最终取舍由我完成；AI 负责扩大探索空间、加速版本迭代、补齐跨专业执行能力。我把它视为“制作系统”而不是“自动出图工具”。</p></div>
+</div></section>
+
+<section class="p-sec alt" id="lz-workflow"><div class="wrap">
+ <div class="sec-head reveal"><span class="num">02 — AIGC Workflow</span><h2>把多个 AI 工具串成一条连续生产链</h2><p>每一步都有明确输入、判断标准与下一步出口，避免不同工具各自生成、最后无法统一。AIGC 在这里承担的是“快速迭代层”，而我的设计规范承担“控制层”。</p></div>
+ <div class="workflow reveal">
+  <div class="wf"><div class="n">01</div><h4>角色设定</h4><p>我先写人设、阵营、背景与视觉关键词。</p></div>
+  <div class="wf"><div class="n">02</div><h4>Q 版迭代</h4><p>ChatGPT 多轮生成，快速比较服饰、轮廓与气质。</p></div>
+  <div class="wf"><div class="n">03</div><h4>立绘统一</h4><p>ChatGPT → HoloPix → ChatGPT，统一画风并修整细节。</p></div>
+  <div class="wf"><div class="n">04</div><h4>剧情扩写</h4><p>Gemini + ChatGPT 辅助支线、对白与分支补全。</p></div>
+  <div class="wf"><div class="n">05</div><h4>素材生产</h4><p>背景、地图、道具卡、CG 素材批量迭代。</p></div>
+  <div class="wf"><div class="n">06</div><h4>AI Coding</h4><p>Codex 理解素材页逻辑，在 Unity 中协助实现。</p></div>
+  <div class="wf"><div class="n">07</div><h4>多模态收尾</h4><p>Gemini / 剪映加工 CG，Suno 生成分场景音乐。</p></div>
+ </div>
+ <div class="ai-strip reveal"><span class="ai-pill">ChatGPT · 视觉 / 文本 / 修图</span><span class="ai-pill">HoloPix · 风格一致性</span><span class="ai-pill">Gemini · 剧情 / CG</span><span class="ai-pill">Codex · Unity Coding</span><span class="ai-pill">剪映 · CG 后期</span><span class="ai-pill">Suno · BGM</span></div>
+</div></section>
+
+<section class="p-sec"><div class="wrap">
+ <div class="sec-head reveal"><span class="num">03 — Character System</span><h2>从人设草稿到可落地的双形态角色资产</h2><p>15 个角色需要同时拥有“剧情识别度”和“视觉统一性”。我先锁定角色背景与差异点，再让 AI 在受约束的范围内发散；最后用统一画风、比例和细节规则收束为可直接进入游戏的 Q 版与正比立绘。</p></div>
+ <div class="figure wide reveal"><img src="assets-4/media_009.png" alt="15 位角色 Q 版形象与阵营资产总览"><div class="cap">角色背景故事设计 · 先定义角色身份、关系、性格与视觉锚点</div></div>
+ <div class="pipeline reveal" style="margin-top:42px">
+  <div class="stage"><b>ChatGPT · 初始立绘</b><p>根据角色设定快速产生多版造型，解决“从文字到视觉方向”的启动成本。</p></div><div class="go">→</div>
+  <div class="stage"><b>HoloPix · 风格归一</b><p>针对笔触、色彩、服饰细节与人物比例做一致性校正，让 15 人成为同一世界的角色。</p></div><div class="go">→</div>
+  <div class="stage"><b>ChatGPT · 清晰度 / 修整</b><p>修复局部细节、增强清晰度并做最终比例检查，输出 Q 版与正比资产。</p></div>
+ </div>
+ <div style="margin-top:42px"><div class="figure wide reveal"><img src="assets-5/media_025.png" alt="15 角色双形态视觉资产 · 正比立绘 + Q 版形象"><div class="cap">15 位角色 Q 版形象总览 · 人、妖、捉妖师等阵营以统一比例、轮廓与配色规则形成可直接进入游戏的角色资产</div></div></div>
+</div></section>
+
+<section class="p-sec alt"><div class="wrap">
+ <div class="sec-head reveal"><span class="num">04 — Narrative System</span><h2>AI 扩写对白，但剧情“网络结构”由我先搭好</h2><p>我先定义阵营、角色目标、冲突关系与三日时间轴，再用 Gemini 与 ChatGPT 辅助补全对白、支线与场景描写。这样 AI 不会自由漂移，而是在明确的角色动机与信息揭示顺序中工作。</p></div>
+ <div class="grid-2" style="align-items:start">
+  <div class="figure  reveal"><img src="assets-5/media_026.png" alt="角色阵营与关系图 · 好人 / 坏人 / 中立 / 人妖立场并非完全重合"><div class="cap">角色阵营与关系图 · 好人 / 坏人 / 中立 / 人妖立场并非完全重合</div></div>
+  <div class="card reveal d1"><div class="mini-label">三日人物轨迹表 · Narrative Matrix</div><h3 class="subh">把复杂剧情变成可检查的生产表</h3><p style="font-size:14px;color:var(--ink2);margin-bottom:18px">附件中的三日人物轨迹以“角色 × 时段 × 地点 × 事件 / 对话”组织内容。每天约覆盖 14–15 名关键角色，使主线、支线与隐藏事件能够在同一张逻辑表中被追踪。</p>
+  <div class="role-matrix"><div class="rm"><b>Day 1</b><span>建立世界规则与第一轮信息</span></div><div class="rm"><b>Day 2</b><span>角色秘密与冲突升级</span></div><div class="rm"><b>Day 3</b><span>立场揭示与结局选择</span></div><div class="rm"><b>Branch</b><span>行动点 / 道具 / 好感驱动</span></div></div>
+  <div class="lz-note" style="margin-top:18px"><b style="font-size:17px">AI 的角色</b><p>补齐语言表达、场景氛围和可选分支；我负责控制角色“为什么这么做”、玩家“何时知道什么”、以及各条支线如何回到主命题。</p></div></div>
+ </div>
+</div></section>
+
+<section class="p-sec">
+<div class="wrap">
+  <div class="sec-head reveal">
+    <span class="num">05 — World &amp; Playable Assets</span>
+    <h2>从地图草图到可探索、可解谜、可游玩的聊斋镇</h2>
+    <p>我先用低保真地图草图确定城镇 / 郊外的区域关系、地点密度和移动路径，再让 AI 将结构转化为统一国风视觉，并持续补充昼夜场景、道具卡与小游戏资产。这里的重点不是“一次生成成图”，而是让草图的信息结构在最终可玩世界中被保留下来。</p>
+  </div>
+
+  <div class="lz-map-pair">
+    <div class="figure reveal"><img src="assets-7/media_092.webp" alt="聊斋镇大地图草图"><div class="cap">AI 输入 · 我绘制的大地图草图<br>先定义区域、地点、路径与信息密度</div></div>
+    <div class="figure reveal d1"><img src="assets-6/media_055.webp" alt="聊斋镇大地图完成稿"><div class="cap">AI 生成 + 二次设计 · 大地图完成稿<br>统一建筑、山水、昼夜与地点标识的视觉语言</div></div>
+  </div>
+
+  <div class="lz-game-title reveal">
+    <div class="mini-label">Playable Experience · 游戏内实机</div>
+    <h3 class="subh" style="margin-bottom:8px">同一套世界观被延展为多种可玩体验</h3>
+    <p>剧情阅读、道具收集、夜间探索、环境互动与轻量小游戏穿插出现，让自由探索不只依赖文本推进。</p>
+  </div>
+  <div class="lz-shot-grid">
+    <div class="figure reveal"><img src="assets-6/media_056.webp" alt="剧情对话与角色互动"><div class="cap"><b>剧情对话与角色互动</b>角色立绘、Q 版场景角色与分支对白共同推进探索。</div></div>
+    <div class="figure reveal d1"><img src="assets-7/media_093.webp" alt="道具卡获取与经营反馈"><div class="cap"><b>道具卡获取与经营反馈</b>探索中获得道具卡，并通过物品属性继续触发经营与支线玩法。</div></div>
+    <div class="figure reveal d2"><img src="assets-7/media_094.webp" alt="烹饪小游戏"><div class="cap"><b>烹饪小游戏</b>将地图探索得到的素材转化为轻量操作玩法，丰富主线之外的节奏。</div></div>
+    <div class="figure reveal d3"><img src="assets-7/media_095.webp" alt="夜间探索与线索道具"><div class="cap"><b>夜间探索与线索道具</b>昼夜切换后场景氛围与可发现内容变化，线索通过道具卡进入背包。</div></div>
+    <div class="figure reveal"><img src="assets-7/media_096.webp" alt="环境交互与即时反馈"><div class="cap"><b>环境交互与即时反馈</b>使用工具探索场景，以文字反馈承接玩家动作与后续结果。</div></div>
+    <div class="figure reveal d1"><img src="assets-7/media_097.webp" alt="角色互动小游戏"><div class="cap"><b>角色互动小游戏</b>在剧情节点插入快速选择型小游戏，降低连续文本阅读的疲劳。</div></div>
+    <div class="figure reveal d2"><img src="assets-7/media_098.webp" alt="推理解谜支线"><div class="cap"><b>推理解谜支线</b>通过阅读条件、梳理人物关系并做出选择，形成独立的小型推理任务。</div></div>
+    <div class="figure reveal d3"><img src="assets-7/media_099.webp" alt="钓鱼小游戏"><div class="cap"><b>钓鱼小游戏</b>以第一视角操作丰富场景活动，让自由探索获得更多可重复游玩内容。</div></div>
+  </div>
+</div>
+</section>
+
+<section class="p-sec alt"><div class="wrap">
+ <div class="sec-head reveal"><span class="num">06 — Multimodal Production</span><h2>把视觉、代码、CG 与音乐都纳入同一套设计语境</h2><p>项目后期的关键不是继续“多生成”，而是让不同媒介共同服务同一段体验：白天 / 夜晚、主线 / 支线、危险 / 日常都要在视觉、声音与交互反馈上保持一致。</p></div>
+ <div class="toolgrid">
+  <div class="toolcard reveal"><div class="tool">Codex × Unity</div><div class="use">素材逻辑 → 交互逻辑 → 可玩实现</div><p>我先搭建页面与素材结构，再让 Codex 理解已有逻辑并辅助编写 Unity 代码。我负责玩法状态、交互规则、异常情况和最终调试。</p></div>
+  <div class="toolcard reveal d1"><div class="tool">ChatGPT × Gemini × 剪映</div><div class="use">静态画面 → CG → 后期节奏</div><p>把角色 / 场景图作为 CG 素材继续加工，补充关键剧情的镜头表现，让高信息密度文本出现“视觉呼吸点”。</p></div>
+  <div class="toolcard reveal d2"><div class="tool">Suno</div><div class="use">白天 / 黑夜 / 主线 / 支线 / 小游戏</div><p>按场景功能分别定义音乐情绪与节奏，而不是生成一首全局 BGM；音乐成为状态识别的一部分。</p></div>
+ </div>
+</div></section>
+
+<section class="p-sec" id="lz-result"><div class="wrap">
+ <div class="sec-head reveal"><span class="num">07 — Impact</span><h2>AIGC 带来的提升：不是“更省事”，而是让我能承担更完整的制作链</h2><p>对我而言，AIGC 最大的价值是把原本跨越编剧、美术、程序、视频和音频的高摩擦协作，变成一条个人可控的快速验证链，使更多时间回到体验结构与设计判断。</p></div>
+ <div class="compare reveal"><div class="side"><h4>传统个人制作的瓶颈</h4><ul><li>角色视觉从草稿到统一资产迭代成本高</li><li>大量支线对白容易产生风格与信息矛盾</li><li>程序实现会阻断设计验证节奏</li><li>CG、音乐等“丰富度内容”很容易被迫舍弃</li></ul></div><div class="side ai"><h4>AI-augmented workflow</h4><ul><li>先发散多版本，再用设计规范快速收束</li><li>以剧情矩阵为约束，让 AI 批量补全而不替代叙事结构</li><li>Codex 缩短“设计想法 → Unity 可玩版本”的路径</li><li>同一世界观可以继续延展到 CG、音频和宣传素材</li></ul></div></div>
+ <div class="resultband reveal" style="margin-top:30px"><div class="rb"><b>15</b><span>角色系统化资产</span></div><div class="rb"><b>3-Day</b><span>角色轨迹与分支叙事</span></div><div class="rb"><b>6+</b><span>AI 工具协同工作流</span></div><div class="rb"><b>Steam</b><span>Unity 成品上传</span></div></div>
+ <div class="pull reveal" style="margin-top:42px">AI 没有替我做设计决策。它把“做不做得出来”的问题压缩，让我能把更多精力放在 <span class="hl">世界规则、角色动机、信息节奏、交互反馈与最终取舍</span> 上。</div>
+</div></section>
+<section class="p-sec alt" id="lz-demo"><div class="wrap">
+  <div class="sec-head reveal"><span class="num">08 — Gameplay Demo</span><h2>部分玩法演示 · 从设计工作流回到最终可玩体验</h2><p>最终我将角色、剧情、地图、道具、小游戏、CG 与音乐整合进 Unity，并完成可运行版本。下面的视频展示游戏中的部分自由探索、互动与小游戏流程。</p></div>
+  <div class="lz-demo-wrap reveal">
+    <div class="videobox"><video controls playsinline preload="metadata" poster="assets-6/media_056.webp"><source src="assets-4/media_010.mp4" type="video/mp4">当前浏览器不支持视频播放。</video></div>
+    <div class="lz-demo-note">《薛定谔的聊斋镇》· 部分玩法演示（网页内嵌优化版）</div>
+  </div>
+</div></section>
+
+
+<div class="pnext"><div class="wrap"><h3>下一个项目</h3><p>从 AIGC 游戏生产转向多源数据与 AI 决策驱动的健康服务系统。</p><div class="row"><a href="javascript:void 0" onclick="showPage('yingji');return false" class="btn" style="background:linear-gradient(135deg,#ee607c,#c93f5d)">下一个项目 · 应·季 SeasonEase <span class="arw">→</span></a><a href="javascript:void 0" onclick="showPage('index');return false" class="btn ghost">返回首页</a></div></div></div>
+</div>
+</div>
+
+<div class="pageview" id="pv-yingji">
+  <svg class="iconset" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="yj-pulse" viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 2-5h8"/></symbol>
+    <symbol id="yj-map" viewBox="0 0 24 24"><path d="M9 3L3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></symbol>
+    <symbol id="yj-ai" viewBox="0 0 24 24"><path d="M8 3h8l1 4 4 1v8l-4 1-1 4H8l-1-4-4-1V8l4-1z"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M9 16h6"/></symbol>
+  </svg>
+
+  <header class="p-hero yj-hero">
+    <div class="cover"><img src="assets-3/media_003.png" alt="应季 SeasonEase 项目封面"></div>
+    <div class="wrap">
+      <a class="back" href="javascript:void 0" onclick="showPage('index');return false">← 返回作品集</a>
+      <div class="kind">Service Design · AI Decision System · Health Experience</div>
+      <h1>应·季 SeasonEase</h1>
+      <p class="desc">基于生理监测与多源数据融合的过敏全周期服务系统设计。把环境风险、生理反应、主观记录、应急物资与长期管理连接起来，让季节性过敏从“临时应对”转向可预测、可量化、可持续的主动管理。</p>
+      <div class="facts">
+        <div class="f"><b>24h</b><span>风险前置预警</span></div>
+        <div class="f"><b>3 Layers</b><span>感知 / 逻辑 / 服务</span></div>
+        <div class="f"><b>15 min</b><span>O2O 应急闭环设想</span></div>
+        <div class="f"><b>App + Watch</b><span>跨端体验</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="p-body">
+    <section class="p-sec"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">01 — Context</span><h2>把“季节性不适”重新定义为一个需要连续管理的服务问题</h2><p>项目从花粉的季节性暴露出发：花粉轻、细、易扩散，过敏反应会同时影响呼吸、眼部、皮肤、睡眠、学习与工作。问题的关键并不只是“知道今天花粉高不高”，而是如何在出行前、暴露中、症状发生后以及就医复盘中持续支持用户。</p></div>
+      <div class="yj-insight reveal"><b>设计命题</b><p>现有应对多是口罩、药物与临时回避，信息来源也常停留在宏观区域级。项目希望把监测、预警、行为建议、应急物资、症状记录和长期数据资产整合成一个可持续的全周期闭环。</p></div>
+      <div class="yj-statgrid reveal">
+        <div class="yj-stat"><b>20%</b><span>项目调研中引用的春季过敏发病率量级</span></div>
+        <div class="yj-stat"><b>50%</b><span>圆柏花粉过敏阳性检出率量级</span></div>
+        <div class="yj-stat"><b>400+</b><span>高峰期医院日均就诊量案例</span></div>
+        <div class="yj-stat"><b>100+</b><span>花粉浓度达到反应阈值的量级</span></div>
+      </div>
+      <div class="figure wide reveal" style="margin-top:38px"><img src="assets-6/media_057.jpg" alt="应季项目背景与花粉问题说明"><div class="cap">项目背景 · 花粉暴露与花粉过敏症患者的持续管理挑战</div></div>
+      <div class="figure wide reveal" style="margin-top:28px"><img src="assets-6/media_058.jpg" alt="北京花粉严重现状桌面调研"><div class="cap">桌面调研 · 从患病率、就诊量、过敏原与应急行为梳理问题规模</div></div>
+    </div></section>
+
+    <section class="p-sec alt"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">02 — Research</span><h2>从宏观环境到竞品生态，确认“系统应对弱”是主要缺口</h2><p>桌面调研将政策、社会、技术、环境与市场放在同一视野中：北京已有花粉监测和预警基础，但具体到公共空间与个人行为，仍存在连续支持不足、数据颗粒度有限、服务断层和长期管理缺失的问题。</p></div>
+      <div class="yj-eq2">
+        <div class="figure reveal"><img src="assets-6/media_059.jpg" alt="应季 PESTEL SWOT"><div class="cap">PESTEL + SWOT · 从政策、社会、技术和环境条件寻找设计介入空间</div></div>
+        <div class="figure reveal d1"><img src="assets-7/media_100.jpg" alt="应季竞品分析"><div class="cap">竞品分析 · 权威数据、技术导航、社区 UGC、实体食疗等方案的服务深度与情感体验对比</div></div>
+      </div>
+      <div class="yj-feature-grid" style="margin-top:32px">
+        <div class="yj-feature reveal"><b>信息有，但行动仍碎片化</b><p>用户能够接触花粉指数、健康科普与防护建议，却仍需要自己完成“判断风险—准备物资—调整路线—记录症状”的多步切换。</p></div>
+        <div class="yj-feature reveal d1"><b>应急工具多，但缺少连续服务</b><p>口罩、喷雾、药物和家用过滤设备解决局部问题，却很难覆盖通勤、户外运动、社交与就医复盘等连续场景。</p></div>
+        <div class="yj-feature reveal d2"><b>宏观数据与个人体感脱节</b><p>项目把街道级风险、生理监测与主观症状放到同一数据模型中，希望形成更个体化的风险判断。</p></div>
+      </div>
+    </div></section>
+
+    <section class="p-sec"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">03 — User Research</span><h2>访谈 + Co-design：从“我很难受”拆到可执行的服务触点</h2><p>研究阶段使用一对一非结构访谈梳理用户出门流程，并通过社媒社群触达与卡片分类降低共创门槛。用户不只讨论症状，也会谈到忘带口罩后的焦虑、药物副作用、公共场景尴尬、对区级风险数据的不信任，以及对应急物资内容的真实偏好。</p></div>
+      <div class="yj-slide-grid">
+        <div class="figure reveal"><img src="assets-6/media_060.jpg" alt="应季访谈分析"><div class="cap">访谈记录 · 对症状、药物、副作用、社交尴尬、精准数据与养生需求进行分层</div></div>
+        <div class="figure reveal d1"><img src="assets-6/media_061.jpg" alt="应季共创工作坊"><div class="cap">Co-design · 从出门流程、功能卡片到应急花粉包内容筛选</div></div>
+        <div class="figure reveal"><img src="assets-6/media_062.jpg" alt="应季卡片分类与需求行为分析"><div class="cap">卡片分类 · 用勾 / 圈 / 叉等直观语言快速确认防护物资与功能优先级</div></div>
+        <div class="figure reveal d1"><img src="assets-6/media_063.jpg" alt="应季用户画像与移情图"><div class="cap">用户画像与移情图 · 重度患者、通勤职场新人、手机重度使用者等典型场景</div></div>
+      </div>
+      <div class="pull reveal" style="margin-top:36px">用户真正需要的不是更多“红色预警”，而是把 <span class="hl">精确预警、生活提醒、情感关怀、个性化与应急服务</span> 串成连续体验。</div>
+    </div></section>
+
+    <section class="p-sec alt"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">04 — Iteration</span><h2>从空间设施到数字平台：用调研结果不断收束方案</h2><p>早期方案同时探索城市花粉微清洁过渡空间、应急花粉包售卖机、食疗实体店、品牌联名与线上服务平台。随着访谈和共创推进，项目逐渐把重心从“单个空间装置”收束到能够跨越出行前、中、后的数字服务系统。</p></div>
+      <div class="yj-eq2">
+        <div class="figure reveal"><img src="assets-6/media_064.jpg" alt="应季方案迭代"><div class="cap">方案迭代 · 五类触点从空间 / 零售 / 食疗逐步汇入线上服务平台</div></div>
+        <div class="figure reveal d1"><img src="assets-6/media_065.jpg" alt="应季需求转换"><div class="cap">需求转换 · 将研究洞察映射为信息、行为、应急与健康管理功能</div></div>
+      </div>
+    </div></section>
+
+    <section class="p-sec"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">05 — Service System</span><h2>产品系统 + 服务系统地图：让线上决策与线下资源发生连接</h2><p>系统不把 App 当作孤立界面，而是连接用户、可穿戴设备、环境数据、便利店 / 药店 O2O、健康服务与城市风险信息。不同触点在用户暴露前、中、后承担不同角色。</p></div>
+      <div class="yj-eq2">
+        <div class="figure reveal"><img src="assets-7/media_101.jpg" alt="应季产品系统"><div class="cap">Product System · 功能模块与用户任务的组织关系</div></div>
+        <div class="figure reveal d1"><img src="assets-6/media_066.jpg" alt="应季服务系统地图"><div class="cap">Service System Map · 将用户旅程、数据、设备、商户与服务触点放在同一系统中</div></div>
+      </div>
+    </div></section>
+
+    <section class="p-sec alt"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">06 — Product Architecture</span><h2>三层架构：外部环境感知 × 个体生理基线 × AI 决策与即时闭环</h2><p>核心架构由感知层、逻辑层和服务层组成。动态植被、气象与 UGC 标记构成“外感知”；Apple Watch 等生理监测构成“内感官”；逻辑层将环境暴露、生理反应与主观记录关联，形成个人过敏阈值模型，再由 AI 决策引擎分发行为建议和服务。</p></div>
+      <div class="yj-layer-grid">
+        <div class="yj-layer reveal"><div class="n">01 · 感知层</div><h4>全维感知</h4><p>整合卫星遥感植被数据、气象预测、UGC 风险标记与可穿戴生理监测，建立宏观环境与个体状态的双重输入。</p></div>
+        <div class="yj-layer reveal d1"><div class="n">02 · 逻辑层</div><h4>关联分析与预测干预</h4><p>自动匹配“环境暴露—生理反应—主观记录”，把模糊体感转为可持续学习的个人过敏阈值模型。</p></div>
+        <div class="yj-layer reveal d2"><div class="n">03 · 服务层</div><h4>智慧干预与即时闭环</h4><p>动态提供穿衣、出行和用药建议，连接便利店 / 药店库存与应急配送，并沉淀数字化就诊报告。</p></div>
+      </div>
+      <div class="figure wide reveal yj-wide" style="margin-top:34px"><img src="assets-6/media_067.jpg" alt="应季产品概述与系统三维架构"><div class="cap">Product Overview · “环境—生理—行为—服务”多源数据闭环与核心系统价值</div></div>
+    </div></section>
+
+    <section class="p-sec"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">07 — Business & Validation</span><h2>从 MVP 到生态平台：让系统价值具备验证路径</h2><p>项目同时考虑 C 端用户、商户与城市层面的价值，并以阶段性投入—产出—验证目标规划产品成长路径。重点不是一次性“做全”，而是先验证打卡、提醒、花粉地图和生理关联，再逐步进入 AI 风险预测、电商、医疗 SaaS 与硬件联动。</p></div>
+      <div class="yj-eq2">
+        <div class="figure reveal"><img src="assets-6/media_068.jpg" alt="应季商业画布"><div class="cap">Commercial Canvas · 用户、合作方、价值主张、成本与收入关系</div></div>
+        <div class="figure reveal d1"><img src="assets-6/media_069.jpg" alt="应季商业价值与里程碑"><div class="cap">Commercial Value · MVP、产品深化与平台扩张的阶段性验证路线</div></div>
+      </div>
+      <div class="yj-milestones">
+        <div class="yj-milestone reveal"><div class="time">1–6 个月</div><h4>概念验证与 MVP</h4><p>生活提醒、一键打卡、基础病历与基础花粉浓度地图；对接 HealthKit 与提醒逻辑，建立首批“症状—环境—生理”关联数据。</p></div>
+        <div class="yj-milestone reveal d1"><div class="time">7–18 个月</div><h4>产品深化与智能</h4><p>训练个性化风险预测模型，加入避敏导航与商城，扩大注册用户规模，并验证预测准确度、付费渗透率与月经常性收入。</p></div>
+        <div class="yj-milestone reveal d2"><div class="time">19–36+ 个月</div><h4>平台扩张与生态</h4><p>向多模态模型、开放 API、药企研究、保险、医生端 SaaS 与净化设备联动延伸，形成 B + C 端组合型生态。</p></div>
+      </div>
+    </div></section>
+
+    <section class="p-sec alt"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">08 — IA & Prototype</span><h2>信息架构落地到手机端与 Watch：把复杂系统转换成日常可执行动作</h2><p>界面把风险地图、首页状态、个人病历、提醒、个人阈值、应急服务和穿戴端反馈拆成低认知负担的任务路径。手机端承担信息组织与决策，Watch 端承担短时、即时、低打扰的提醒与记录。</p></div>
+      <div class="figure wide reveal yj-wide"><img src="assets-6/media_070.jpg" alt="应季信息架构与高保真原型总览"><div class="cap">Information Architecture + Design Preview · 手机与 Watch 的功能结构及关键界面总览</div></div>
+      <div class="yj-ui-grid" style="margin-top:34px">
+        <div class="figure reveal"><img src="assets-7/media_102.jpg" alt="应季手机端首页界面"><div class="cap">手机端 · 首页与风险状态聚合</div></div>
+        <div class="figure reveal d1"><img src="assets-6/media_071.jpg" alt="应季地图界面"><div class="cap">手机端 · 花粉风险地图 / 路线与服务资源</div></div>
+        <div class="figure reveal"><img src="assets-7/media_103.jpg" alt="应季服务与病历界面"><div class="cap">手机端 · 应急服务、生活建议与个人病历</div></div>
+        <div class="figure reveal d1"><img src="assets-7/media_104.jpg" alt="应季健康数据与提醒界面"><div class="cap">手机端 · 健康数据、症状记录与提醒</div></div>
+        <div class="figure reveal"><img src="assets-7/media_105.jpg" alt="应季 Watch 端界面"><div class="cap">Watch 端 · 症状打卡、风险提醒与花粉实时浓度</div></div>
+        <div class="figure reveal d1"><img src="assets-7/media_106.jpg" alt="应季引导页界面"><div class="cap">手机端 · Onboarding / 引导与品牌情绪建立</div></div>
+      </div>
+    </div></section>
+
+    <section class="p-sec"><div class="wrap">
+      <div class="sec-head reveal"><span class="num">09 — Brand System</span><h2>品牌不只负责“好看”，而是降低健康管理的紧张感</h2><p>视觉系统使用柔和粉紫渐变、季节性植物与拟人化 IP，把高频风险提醒从医疗式警告转为更有陪伴感的生活服务语言。品牌角色同时延伸到 App 引导、Watch 提示、会员身份与运营素材。</p></div>
+      <div class="figure wide reveal yj-wide"><img src="assets-4/media_011.jpg" alt="应季品牌设计"><div class="cap">Brand Design · IP、身份卡、配色、插画与运营应用</div></div>
+      <div class="pull reveal" style="margin-top:36px">SeasonEase 的核心不是增加一个“花粉 App”，而是把 <span class="hl">风险预判、生理量化、行动建议、应急资源与长期健康数据</span> 组织成一个真正能陪用户走完整个过敏季的服务系统。</div>
+    </div></section>
+
+    <div class="pnext"><div class="wrap"><h3>六个项目，六种设计路径</h3><p>从文化体验、适老化、可用性研究到 AIGC 游戏与健康服务系统，回到首页查看完整项目矩阵。</p><div class="row"><a href="javascript:void 0" onclick="showPage('index');return false" class="btn" style="background:linear-gradient(135deg,#ee607c,#c93f5d)">返回作品集首页 <span class="arw">→</span></a><a href="javascript:void 0" onclick="showPage('liaozhai');return false" class="btn ghost">上一个项目 · 薛定谔的聊斋镇</a></div></div></div>
+  </div>
+</div>
+
+<script>
+/* ===== 作品集交互 ===== */
+document.addEventListener('DOMContentLoaded',function(){
+
+  // 滚动进度条
+  var prog=document.getElementById('prog');
+  // 顶栏实体化
+  var nav=document.querySelector('.nav');
+  function onScroll(){
+    var y=window.scrollY||document.documentElement.scrollTop;
+    if(prog){var h=document.body.scrollHeight-window.innerHeight;
+      prog.style.width=(h>0?(y/h*100):0)+'%';}
+    if(nav){nav.classList.toggle('solid',y>60);}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // reveal + bar 动效
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.dataset.count!==undefined)countUp(e.target);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.16});
+  document.querySelectorAll('.reveal,.bar,[data-count]').forEach(function(el){io.observe(el);});
+
+  // 数字滚动
+  function countUp(el){
+    var target=parseFloat(el.dataset.count),dec=(el.dataset.dec|0),
+        suf=el.dataset.suf||'',t0=null,dur=1400;
+    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);
+      var e=1-Math.pow(1-p,3);el.textContent=(target*e).toFixed(dec)+suf;
+      if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+
+  // 灯箱
+  var lb=document.getElementById('lb');
+  if(!lb){lb=document.createElement('div');lb.id='lb';
+    var im=document.createElement('img');var x=document.createElement('div');
+    x.className='x';x.textContent='×';lb.appendChild(im);lb.appendChild(x);
+    document.body.appendChild(lb);}
+  var lbi=lb.querySelector('img');
+  document.querySelectorAll('.figure img,.zoom').forEach(function(im){
+    im.addEventListener('click',function(){lbi.src=im.currentSrc||im.src;lb.classList.add('show');});
+  });
+  lb.addEventListener('click',function(){lb.classList.remove('show');});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('show');});
+
+  // 项目卡片整卡跳转
+  document.querySelectorAll('.pcard[data-href]').forEach(function(c){
+    c.addEventListener('click',function(){location.href=c.dataset.href;});
+  });
+
+  // hero 视差
+  var hero=document.querySelector('.hero .bgwrap, .p-hero .cover');
+  if(hero){window.addEventListener('scroll',function(){
+    var y=window.scrollY;hero.style.transform='translateY('+(y*0.18)+'px)';
+  },{passive:true});}
+});
+
+</script><script>
+function spaScrollTop(){
+  var r=document.documentElement,b=document.body,prev=r.style.scrollBehavior;
+  r.style.scrollBehavior="auto";
+  window.scrollTo(0,0); if(r)r.scrollTop=0; if(b)b.scrollTop=0;
+  r.style.scrollBehavior=prev;
+}
+function showPage(name,anchor){
+  var ps=document.querySelectorAll(".pageview");
+  for(var i=0;i<ps.length;i++)ps[i].classList.remove("active");
+  var el=document.getElementById("pv-"+name); if(!el)return;
+  el.classList.add("active");
+  void el.offsetHeight;
+  spaScrollTop();
+  requestAnimationFrame(spaScrollTop);
+  if(anchor){var a=el.querySelector("#"+anchor)||document.getElementById(anchor);
+    if(a){requestAnimationFrame(function(){a.scrollIntoView();});}}
+}
+window.showPage=showPage;
+if(document.readyState!=="loading"){showPage("index");}
+else{document.addEventListener("DOMContentLoaded",function(){showPage("index");});}
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.pageview').forEach(function(p){
+    if(p.id==='pv-index' || p.querySelector('.project-back-float')) return;
+    var b=document.createElement('button');
+    b.className='project-back-float'; b.type='button'; b.innerHTML='←&nbsp; 返回作品集';
+    b.addEventListener('click',function(){showPage('index');});
+    p.insertBefore(b,p.firstChild);
+  });
+});
+</script>
+
+</body></html>
